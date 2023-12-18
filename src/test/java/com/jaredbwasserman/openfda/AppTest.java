@@ -1,4 +1,4 @@
-package com.jaredbwasserman;
+package com.jaredbwasserman.openfda;
 
 import org.junit.jupiter.api.Test;
 

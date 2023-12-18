@@ -18,7 +18,7 @@ Downloads data from https://api.fda.gov/download.json and converts the data to v
     1. This should be on by default
 5. Pick the folder to download the files and put generate file into
     1. File picker directory only
-6. Button that says start (verifies the type, format, download/generate location are all populated)
+6. Button that says start (verifies the type, fields, format, download/generate location are all populated)
 7. Name of generated file is `<TYPE>-<yyyyMMddHHmmss>.<FORMAT>`
     1. For example: `drug-label-20100416151517.xlsx`
 8. Show progress bar since there are 11 files

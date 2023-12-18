@@ -1,4 +1,4 @@
-package com.jaredbwasserman;
+package com.jaredbwasserman.openfda;
 
 public class App {
     public static void main(String[] args) {
