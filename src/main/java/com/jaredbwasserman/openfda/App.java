@@ -22,9 +22,14 @@ public class App {
 
         // TODO: Fix me
         final FileDownloadClient fileDownloadClient = FileDownloadClientFactory.getFileDownloadClient();
-        fileDownloadClient.downloadFile(
-                "https://api.fda.gov/download.json",
+        final boolean downloadSuccessful = fileDownloadClient.downloadFile(
+                "https://api.fda.gov/download.json1",
                 "/Users/jwasserman/Desktop/download.json"
         );
+        if (downloadSuccessful) {
+            logger.info("Download successful");
+        } else {
+            logger.warn("Download unsuccessful");
+        }
     }
 }

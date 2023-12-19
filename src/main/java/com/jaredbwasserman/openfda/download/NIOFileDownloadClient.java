@@ -15,7 +15,7 @@ public class NIOFileDownloadClient implements FileDownloadClient {
     private static final Logger logger = LoggerFactory.getLogger(NIOFileDownloadClient.class);
 
     @Override
-    public void downloadFile(@NonNull String sourceUrlString, @NonNull String destinationFilePathString) {
+    public boolean downloadFile(@NonNull String sourceUrlString, @NonNull String destinationFilePathString) {
         logger.info(
                 "Download starting: {} -> {}",
                 sourceUrlString,
@@ -31,7 +31,7 @@ public class NIOFileDownloadClient implements FileDownloadClient {
                     sourceUrlString,
                     malformedURLException
             );
-            return;
+            return false;
         }
 
         try (final InputStream urlInputStream = sourceUrl.openStream()) {
@@ -47,7 +47,7 @@ public class NIOFileDownloadClient implements FileDownloadClient {
                         destinationFilePathString,
                         ioException
                 );
-                return;
+                return false;
             }
         } catch (IOException ioException) {
             logger.error(
@@ -55,7 +55,7 @@ public class NIOFileDownloadClient implements FileDownloadClient {
                     sourceUrl,
                     ioException
             );
-            return;
+            return false;
         }
 
         logger.info(
@@ -63,5 +63,6 @@ public class NIOFileDownloadClient implements FileDownloadClient {
                 sourceUrlString,
                 destinationFilePathString
         );
+        return true;
     }
 }
