@@ -1,9 +1,9 @@
 package com.jaredbwasserman.openfda.endpoint;
 
-import java.util.List;
+import java.util.Map;
 
 public record EndpointCategory(
         String displayName,
         String internalName,
-        List<Endpoint> endpoints) {
+        Map<String, Endpoint> endpoints) {
 }
