@@ -30,5 +30,4 @@ Downloads data from https://api.fda.gov/download.json and converts the data to v
     1. Could be some test(s) to verify the constants are correct
 12. Make sure to delete ALL intermediate files
 13. Need to account for the Excel hard limit on the number of rows
-14. Endpoint should have parent category so just can pass around `Endpoint` objects
-15. Make sure to use logging dependencies
+14. Make sure to use logging dependencies
