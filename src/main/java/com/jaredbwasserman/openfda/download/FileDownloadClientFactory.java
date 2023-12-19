@@ -1,7 +1,12 @@
 package com.jaredbwasserman.openfda.download;
 
 public class FileDownloadClientFactory {
+    private static FileDownloadClient nioFileDownloadClient = null;
+
     public static FileDownloadClient getFileDownloadClient() {
-        return new NIOFileDownloadClient();
+        if (null == nioFileDownloadClient) {
+            nioFileDownloadClient = new NIOFileDownloadClient();
+        }
+        return nioFileDownloadClient;
     }
 }

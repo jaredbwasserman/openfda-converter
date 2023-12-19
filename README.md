@@ -17,16 +17,21 @@ Downloads data from https://api.fda.gov/download.json and converts the data to v
 4. Drop down for file format (only xlsx - should default to this - for now)
 5. Option box to discard the downloaded files after Excel file is generated
     1. This should be on by default
-6. Pick the folder to download the files and put generate file into
+6. Option for number of lines per file
+    1. This should default to the maximum amount and be capped between 1 and max inclusive
+7. Pick the folder to download the files and put generate file into
     1. File picker directory only
-7. Button that says start (verifies the type, subtype, fields, format, download/generate location are all populated)
-8. Name of generated file is `<TYPE>-<SUBTYPE>-<yyyyMMdd>-<HHmmss>.<FORMAT>`
-    1. For example: `drug-label-20100416-151517.xlsx`
-9. Show progress bar since there are 11 files
+8. Button that says start (verifies the type, subtype, fields, format, download/generate location are all populated)
+9. Name of generated file is `<TYPE>-<SUBTYPE>-<yyyyMMdd>-<HHmmss>-<PART>.<FORMAT>`
+    1. For example: `drug-label-20100416-151517-0000.xlsx`
+10. Show progress bar since there are 11 files
     1. For example: `Downloading file 1/11`
     2. And continue progress when it is generating the Excel file
-10. Make sure to update Maven version to correlate with GitHub release version
-11. Make a script checked in separately that can be used to one-off generate the list of fields
+11. Make sure to update Maven version to correlate with GitHub release version
+12. Make a script checked in separately that can be used to one-off generate the list of fields
     1. Could be some test(s) to verify the constants are correct
-12. Make sure to delete ALL intermediate files
-13. Need to account for the Excel hard limit on the number of rows
+13. Make sure to delete ALL intermediate files
+14. Need to account for the Excel hard limit on the number of rows
+15. The `DownloadCoordinator` should take in an `Endpoint` and derive the necessary information from it
+16. Lock the interface when it is downloading and processing
+17. Open folder showing Excel files at the end

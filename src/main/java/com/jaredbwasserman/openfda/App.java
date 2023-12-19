@@ -23,7 +23,7 @@ public class App {
         // TODO: Fix me
         final FileDownloadClient fileDownloadClient = FileDownloadClientFactory.getFileDownloadClient();
         final boolean downloadSuccessful = fileDownloadClient.downloadFile(
-                "https://api.fda.gov/download.json1",
+                "https://api.fda.gov/download.json",
                 "/Users/jwasserman/Desktop/download.json"
         );
         if (downloadSuccessful) {
