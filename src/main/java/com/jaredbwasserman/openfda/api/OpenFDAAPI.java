@@ -192,7 +192,7 @@ public class OpenFDAAPI {
     }
 
     @NonNull
-    public static Map<String, Endpoint> getEndpoints(EndpointCategory endpointCategory) {
+    public static Map<String, Endpoint> getEndpoints(@NonNull EndpointCategory endpointCategory) {
         if (null == endpoints) {
             endpoints = new HashMap<>();
             final List<FriendlyName> endpointFriendlyNames = ENDPOINT_CATEGORY_ENDPOINTS.get(endpointCategory.friendlyName());

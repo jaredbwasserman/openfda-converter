@@ -1,6 +1,8 @@
 package com.jaredbwasserman.openfda.api;
 
+import lombok.NonNull;
+
 public record Endpoint(
-        FriendlyName friendlyName,
-        EndpointCategory endpointCategory) {
+        @NonNull FriendlyName friendlyName,
+        @NonNull EndpointCategory endpointCategory) {
 }
