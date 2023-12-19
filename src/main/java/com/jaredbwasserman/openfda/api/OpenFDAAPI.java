@@ -172,31 +172,38 @@ public class OpenFDAAPI {
             )
     );
 
+    private static Map<String, EndpointCategory> endpointCategories = null;
+    private static Map<String, Endpoint> endpoints = null;
+
     @NonNull
     public static Map<String, EndpointCategory> getEndpointCategories() {
-        final Map<String, EndpointCategory> endpointCategories = new HashMap<>();
-        for (final FriendlyName endpointCategoryFriendlyName : ENDPOINT_CATEGORY_ENDPOINTS.keySet()) {
-            endpointCategories.put(
-                    endpointCategoryFriendlyName.displayName(),
-                    new EndpointCategory(
-                            endpointCategoryFriendlyName
-                    )
-            );
+        if (null == endpointCategories) {
+            endpointCategories = new HashMap<>();
+            for (final FriendlyName endpointCategoryFriendlyName : ENDPOINT_CATEGORY_ENDPOINTS.keySet()) {
+                endpointCategories.put(
+                        endpointCategoryFriendlyName.displayName(),
+                        new EndpointCategory(
+                                endpointCategoryFriendlyName
+                        )
+                );
+            }
         }
         return endpointCategories;
     }
 
     @NonNull
     public static Map<String, Endpoint> getEndpoints(EndpointCategory endpointCategory) {
-        final Map<String, Endpoint> endpoints = new HashMap<>();
-        final List<FriendlyName> endpointFriendlyNames = ENDPOINT_CATEGORY_ENDPOINTS.get(endpointCategory.friendlyName());
-        for (final FriendlyName endpointFriendlyName : endpointFriendlyNames) {
-            endpoints.put(
-                    endpointFriendlyName.displayName(),
-                    new Endpoint(
-                            endpointFriendlyName,
-                            endpointCategory
-                    ));
+        if (null == endpoints) {
+            endpoints = new HashMap<>();
+            final List<FriendlyName> endpointFriendlyNames = ENDPOINT_CATEGORY_ENDPOINTS.get(endpointCategory.friendlyName());
+            for (final FriendlyName endpointFriendlyName : endpointFriendlyNames) {
+                endpoints.put(
+                        endpointFriendlyName.displayName(),
+                        new Endpoint(
+                                endpointFriendlyName,
+                                endpointCategory
+                        ));
+            }
         }
         return endpoints;
     }
