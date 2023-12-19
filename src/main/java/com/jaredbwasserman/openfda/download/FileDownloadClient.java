@@ -2,6 +2,9 @@ package com.jaredbwasserman.openfda.download;
 
 import lombok.NonNull;
 
+import java.util.Optional;
+
 public interface FileDownloadClient {
-    boolean downloadFile(@NonNull String sourceUrlString, @NonNull String destinationFilePathString);
+    @NonNull
+    Optional<String> downloadFile(@NonNull String sourceUrlString, @NonNull String destinationDirectoryPathString);
 }

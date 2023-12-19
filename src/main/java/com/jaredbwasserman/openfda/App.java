@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Map;
+import java.util.Optional;
 
 public class App {
     private static final Logger logger = LoggerFactory.getLogger(App.class);
@@ -22,12 +23,12 @@ public class App {
 
         // TODO: Fix me
         final FileDownloadClient fileDownloadClient = FileDownloadClientFactory.getFileDownloadClient();
-        final boolean downloadSuccessful = fileDownloadClient.downloadFile(
+        final Optional<String> destinationFilePathStringOptional = fileDownloadClient.downloadFile(
                 "https://api.fda.gov/download.json",
-                "/Users/jwasserman/Desktop/download.json"
+                "/Users/jwasserman/Desktop/"
         );
-        if (downloadSuccessful) {
-            logger.info("Download successful");
+        if (destinationFilePathStringOptional.isPresent()) {
+            logger.info("Download successful: {}", destinationFilePathStringOptional.get());
         } else {
             logger.warn("Download unsuccessful");
         }

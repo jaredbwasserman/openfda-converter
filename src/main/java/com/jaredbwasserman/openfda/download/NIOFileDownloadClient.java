@@ -10,16 +10,18 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.Channels;
+import java.util.Optional;
 
 public class NIOFileDownloadClient implements FileDownloadClient {
     private static final Logger logger = LoggerFactory.getLogger(NIOFileDownloadClient.class);
 
     @Override
-    public boolean downloadFile(@NonNull String sourceUrlString, @NonNull String destinationFilePathString) {
+    @NonNull
+    public Optional<String> downloadFile(@NonNull String sourceUrlString, @NonNull String destinationDirectoryPathString) {
         logger.info(
                 "Download starting: {} -> {}",
                 sourceUrlString,
-                destinationFilePathString
+                destinationDirectoryPathString
         );
 
         URL sourceUrl;
@@ -31,8 +33,10 @@ public class NIOFileDownloadClient implements FileDownloadClient {
                     sourceUrlString,
                     malformedURLException
             );
-            return false;
+            return Optional.empty();
         }
+
+        final String destinationFilePathString = getDestinationFilePathString(sourceUrl, destinationDirectoryPathString);
 
         try (final InputStream urlInputStream = sourceUrl.openStream()) {
             try (final FileOutputStream fileOutputStream = new FileOutputStream(destinationFilePathString)) {
@@ -47,7 +51,7 @@ public class NIOFileDownloadClient implements FileDownloadClient {
                         destinationFilePathString,
                         ioException
                 );
-                return false;
+                return Optional.empty();
             }
         } catch (IOException ioException) {
             logger.error(
@@ -55,14 +59,24 @@ public class NIOFileDownloadClient implements FileDownloadClient {
                     sourceUrl,
                     ioException
             );
-            return false;
+            return Optional.empty();
         }
 
         logger.info(
                 "Download finished: {} -> {}",
                 sourceUrlString,
-                destinationFilePathString
+                destinationDirectoryPathString
         );
-        return true;
+        return Optional.of(destinationFilePathString);
+    }
+
+    @NonNull
+    private String getDestinationFilePathString(@NonNull URL sourceUrl, @NonNull String destinationDirectoryPathString) {
+        final String[] sourcePathParts = sourceUrl.getPath().split("/");
+        return String.join(
+                "/",
+                destinationDirectoryPathString,
+                sourcePathParts[sourcePathParts.length - 1]
+        );
     }
 }

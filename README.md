@@ -4,6 +4,8 @@ Downloads data from https://api.fda.gov/download.json and converts the data to v
 
 ## References
 
+* [Download a File From an URL in Java](https://www.baeldung.com/java-download-file)
+* [Downloading Multiple Files Parallelly or Asynchronously in Java](https://stackoverflow.com/questions/33075208/downloading-multiple-files-parallelly-or-asynchronously-in-java)
 * [How To Use GUI Designer In IntelliJ IDEA IDE (2023 )](https://www.youtube.com/watch?v=whF_Qm1epQ8)
 
 ## TODO
@@ -32,6 +34,5 @@ Downloads data from https://api.fda.gov/download.json and converts the data to v
     1. Could be some test(s) to verify the constants are correct
 13. Make sure to delete ALL intermediate files
 14. Need to account for the Excel hard limit on the number of rows
-15. The `DownloadCoordinator` should take in an `Endpoint` and derive the necessary information from it
-16. Lock the interface when it is downloading and processing
-17. Open folder showing Excel files at the end
+15. Lock the interface when it is downloading and processing
+16. Open folder showing Excel files at the end
