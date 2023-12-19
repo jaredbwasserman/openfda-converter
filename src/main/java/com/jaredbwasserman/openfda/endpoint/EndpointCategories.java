@@ -4,6 +4,9 @@ import java.util.Map;
 
 // See https://open.fda.gov/apis/
 public class EndpointCategories {
+    // TODO: Fix me
+    // Field names
+
     // Endpoint names
     private static final String ENDPOINT_ADVERSE_EVENTS_NAME = "Adverse Events";
     private static final String ENDPOINT_PRODUCT_LABELING_NAME = "Product Labeling";

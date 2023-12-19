@@ -28,3 +28,7 @@ Downloads data from https://api.fda.gov/download.json and converts the data to v
 10. Make sure to update Maven version to correlate with GitHub release version
 11. Make a script checked in separately that can be used to one-off generate the list of fields
     1. Could be some test(s) to verify the constants are correct
+12. Make sure to delete ALL intermediate files
+13. Need to account for the Excel hard limit on the number of rows
+14. Endpoint should have parent category so just can pass around `Endpoint` objects
+15. Make sure to use logging dependencies
