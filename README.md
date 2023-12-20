@@ -6,6 +6,7 @@ Downloads data from the [openFDA API](https://api.fda.gov/download.json) and con
 
 * [Download a File From an URL in Java](https://www.baeldung.com/java-download-file)
 * [Downloading Multiple Files Parallelly or Asynchronously in Java](https://stackoverflow.com/questions/33075208/downloading-multiple-files-parallelly-or-asynchronously-in-java)
+* [How to extract specific file in a zip file in java](https://stackoverflow.com/questions/32179094/how-to-extract-specific-file-in-a-zip-file-in-java)
 * [How To Use GUI Designer In IntelliJ IDEA IDE (2023 )](https://www.youtube.com/watch?v=whF_Qm1epQ8)
 
 ## TODO
@@ -24,8 +25,8 @@ Downloads data from the [openFDA API](https://api.fda.gov/download.json) and con
 7. Pick the folder to download the files and put generate file into
     1. File picker directory only
 8. Button that says start (verifies the type, subtype, fields, format, download/generate location are all populated)
-9. Name of generated file is `<TYPE>-<SUBTYPE>-<yyyyMMdd>-<HHmmss>-<PART>.<FORMAT>`
-    1. For example: `drug-label-20100416-151517-0000.xlsx`
+9. Name of generated file is `<TYPE>-<SUBTYPE>-<yyyyMMdd>-<HHmmss>-<PART>-of-<PARTS>.<FORMAT>`
+    1. For example: `drug-label-20100416-151517-0000-of-0010.xlsx`
 10. Show progress bar since there are 11 files
     1. For example: `Downloading file 1/11`
     2. And continue progress when it is generating the Excel file

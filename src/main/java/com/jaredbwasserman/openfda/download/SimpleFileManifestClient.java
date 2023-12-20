@@ -41,9 +41,10 @@ public record SimpleFileManifestClient(
         final String fileManifestFilePathString = fileManifestFilePathStringOptional.get();
 
         // Next, create a file manifest object
+        final File fileManifestFile = new File(fileManifestFilePathString);
         FileManifest fileManifest;
         try {
-            fileManifest = mapper.readValue(new File(fileManifestFilePathString), FileManifest.class);
+            fileManifest = mapper.readValue(fileManifestFile, FileManifest.class);
         } catch (Exception exception) {
             logger.error(
                     "Error while reading file manifest {} into FileManifest object",
@@ -51,6 +52,17 @@ public record SimpleFileManifestClient(
                     exception
             );
             return Collections.emptyList();
+        }
+
+        // Next, delete the file manifest file
+        try {
+            fileManifestFile.delete();
+        } catch (Exception exception) {
+            logger.warn(
+                    "Could not delete file manifest file {}",
+                    fileManifestFile,
+                    exception
+            );
         }
 
         // Finally, parse the file manifest to get the list of files to download

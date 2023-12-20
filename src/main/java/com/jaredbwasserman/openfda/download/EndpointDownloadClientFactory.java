@@ -1,5 +1,7 @@
 package com.jaredbwasserman.openfda.download;
 
+import com.jaredbwasserman.openfda.zip.FileZipperFactory;
+
 public class EndpointDownloadClientFactory {
     private static ForkJoinEndpointDownloadClient forkJoinEndpointDownloadClient = null;
 
@@ -7,7 +9,8 @@ public class EndpointDownloadClientFactory {
         if (null == forkJoinEndpointDownloadClient) {
             forkJoinEndpointDownloadClient = new ForkJoinEndpointDownloadClient(
                     FileManifestClientFactory.getFileManifestClient(),
-                    FileDownloadClientFactory.getFileDownloadClient()
+                    FileDownloadClientFactory.getFileDownloadClient(),
+                    FileZipperFactory.getFileZipper()
             );
         }
         return forkJoinEndpointDownloadClient;
