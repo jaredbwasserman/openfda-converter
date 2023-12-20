@@ -175,7 +175,7 @@ public class OpenFDAAPI {
     private static Map<FriendlyName, Map<String, Endpoint>> endpoints = null;
 
     @NonNull
-    public static Map<String, EndpointCategory> getEndpointCategories() {
+    private static Map<String, EndpointCategory> getEndpointCategories() {
         if (null == endpointCategories) {
             endpointCategories = new HashMap<>();
             for (final FriendlyName endpointCategoryFriendlyName : ENDPOINT_CATEGORY_ENDPOINTS.keySet()) {
@@ -191,7 +191,7 @@ public class OpenFDAAPI {
     }
 
     @NonNull
-    public static Map<String, Endpoint> getEndpoints(@NonNull EndpointCategory endpointCategory) {
+    private static Map<String, Endpoint> getEndpoints(@NonNull EndpointCategory endpointCategory) {
         if (null == endpoints) {
             endpoints = new HashMap<>();
         }
@@ -209,6 +209,11 @@ public class OpenFDAAPI {
             }
         }
         return endpoints.get(endpointCategory.friendlyName());
+    }
+
+    @NonNull
+    public static Endpoint getEndpoint(@NonNull String endpointCategoryDisplayName, @NonNull String endpointDisplayName) {
+        return getEndpoints(getEndpointCategories().get(endpointCategoryDisplayName)).get(endpointDisplayName);
     }
 
     @NonNull
