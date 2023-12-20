@@ -14,7 +14,7 @@ public class App {
     public static void main(String[] args) {
         // TODO: Fix me
         final EndpointDownloadClient endpointDownloadClient = EndpointDownloadClientFactory.getEndpointDownloadClient();
-        final List<String> endpointFiles = endpointDownloadClient.downloadEndpointFiles(
+        final List<String> endpointFiles = endpointDownloadClient.downloadAndUnzipEndpointFiles(
                 OpenFDAAPI.getEndpoint(OpenFDAAPI.ENDPOINT_CATEGORY_DRUG, OpenFDAAPI.ENDPOINT_PRODUCT_LABELING),
                 "/Users/jwasserman/Desktop"
         );

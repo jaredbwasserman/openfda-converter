@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface EndpointDownloadClient {
     @NonNull
-    List<String> downloadEndpointFiles(@NonNull Endpoint endpoint, @NonNull String destinationDirectoryPathString);
+    List<String> downloadAndUnzipEndpointFiles(@NonNull Endpoint endpoint, @NonNull String destinationDirectoryPathString);
 }

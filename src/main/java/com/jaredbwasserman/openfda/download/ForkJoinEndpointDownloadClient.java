@@ -21,7 +21,7 @@ public record ForkJoinEndpointDownloadClient(
 
     @Override
     @NonNull
-    public List<String> downloadEndpointFiles(@NonNull Endpoint endpoint, @NonNull String destinationDirectoryPathString) {
+    public List<String> downloadAndUnzipEndpointFiles(@NonNull Endpoint endpoint, @NonNull String destinationDirectoryPathString) {
         logger.info(
                 "Download and unzip starting: {} -> {}",
                 endpoint,
