@@ -8,26 +8,23 @@ import java.util.Map;
 
 // See https://open.fda.gov/apis/
 public class OpenFDAAPI {
-    // TODO: Fix me
-    // Field names
-
     // Endpoint display names
-    private static final String ENDPOINT_ADVERSE_EVENTS_DISPLAY_NAME = "Adverse Events";
-    private static final String ENDPOINT_PRODUCT_LABELING_DISPLAY_NAME = "Product Labeling";
-    private static final String ENDPOINT_NDC_DIRECTORY_DISPLAY_NAME = "NDC Directory";
-    private static final String ENDPOINT_RECALL_ENFORCEMENT_REPORTS_DISPLAY_NAME = "Recall Enforcement Reports";
-    private static final String ENDPOINT_DRUGS_AT_FDA_DISPLAY_NAME = "Drugs@FDA";
-    private static final String ENDPOINT_510_K_DISPLAY_NAME = "510(k)";
-    private static final String ENDPOINT_CLASSIFICATION_DISPLAY_NAME = "Classification";
-    private static final String ENDPOINT_PRE_MARKET_APPROVAL_DISPLAY_NAME = "Pre-market Approval";
-    private static final String ENDPOINT_RECALLS_DISPLAY_NAME = "Recalls";
-    private static final String ENDPOINT_REGISTRATIONS_AND_LISTINGS_DISPLAY_NAME = "Registrations and Listings";
-    private static final String ENDPOINT_COVID_19_SEROLOGICAL_TESTING_EVALUATIONS_DISPLAY_NAME = "COVID-19 Serological Testing Evaluations";
-    private static final String ENDPOINT_UNIQUE_DEVICE_IDENTIFIER_DISPLAY_NAME = "Unique Device Identifier";
-    private static final String ENDPOINT_NSDE_DISPLAY_NAME = "NSDE";
-    private static final String ENDPOINT_SUBSTANCE_DATA_REPORTS_DISPLAY_NAME = "Substance Data Reports";
-    private static final String ENDPOINT_UNII_DISPLAY_NAME = "UNII";
-    private static final String ENDPOINT_PROBLEM_REPORTS_DISPLAY_NAME = "Problem Reports";
+    public static final String ENDPOINT_ADVERSE_EVENTS_DISPLAY_NAME = "Adverse Events";
+    public static final String ENDPOINT_PRODUCT_LABELING_DISPLAY_NAME = "Product Labeling";
+    public static final String ENDPOINT_NDC_DIRECTORY_DISPLAY_NAME = "NDC Directory";
+    public static final String ENDPOINT_RECALL_ENFORCEMENT_REPORTS_DISPLAY_NAME = "Recall Enforcement Reports";
+    public static final String ENDPOINT_DRUGS_AT_FDA_DISPLAY_NAME = "Drugs@FDA";
+    public static final String ENDPOINT_510_K_DISPLAY_NAME = "510(k)";
+    public static final String ENDPOINT_CLASSIFICATION_DISPLAY_NAME = "Classification";
+    public static final String ENDPOINT_PRE_MARKET_APPROVAL_DISPLAY_NAME = "Pre-market Approval";
+    public static final String ENDPOINT_RECALLS_DISPLAY_NAME = "Recalls";
+    public static final String ENDPOINT_REGISTRATIONS_AND_LISTINGS_DISPLAY_NAME = "Registrations and Listings";
+    public static final String ENDPOINT_COVID_19_SEROLOGICAL_TESTING_EVALUATIONS_DISPLAY_NAME = "COVID-19 Serological Testing Evaluations";
+    public static final String ENDPOINT_UNIQUE_DEVICE_IDENTIFIER_DISPLAY_NAME = "Unique Device Identifier";
+    public static final String ENDPOINT_NSDE_DISPLAY_NAME = "NSDE";
+    public static final String ENDPOINT_SUBSTANCE_DATA_REPORTS_DISPLAY_NAME = "Substance Data Reports";
+    public static final String ENDPOINT_UNII_DISPLAY_NAME = "UNII";
+    public static final String ENDPOINT_PROBLEM_REPORTS_DISPLAY_NAME = "Problem Reports";
 
     // Endpoint names
     private static final FriendlyName ENDPOINT_ADVERSE_EVENTS_NAME = new FriendlyName(
@@ -96,12 +93,12 @@ public class OpenFDAAPI {
     );
 
     // Endpoint category display names
-    private static final String ENDPOINT_CATEGORY_ANIMAL_AND_VETERINARY_DISPLAY_NAME = "Animal & Veterinary";
-    private static final String ENDPOINT_CATEGORY_DRUG_DISPLAY_NAME = "Drug";
-    private static final String ENDPOINT_CATEGORY_DEVICE_DISPLAY_NAME = "Device";
-    private static final String ENDPOINT_CATEGORY_FOOD_DISPLAY_NAME = "Food";
-    private static final String ENDPOINT_CATEGORY_OTHER_DISPLAY_NAME = "Other";
-    private static final String ENDPOINT_CATEGORY_TOBACCO_DISPLAY_NAME = "Tobacco";
+    public static final String ENDPOINT_CATEGORY_ANIMAL_AND_VETERINARY_DISPLAY_NAME = "Animal & Veterinary";
+    public static final String ENDPOINT_CATEGORY_DRUG_DISPLAY_NAME = "Drug";
+    public static final String ENDPOINT_CATEGORY_DEVICE_DISPLAY_NAME = "Device";
+    public static final String ENDPOINT_CATEGORY_FOOD_DISPLAY_NAME = "Food";
+    public static final String ENDPOINT_CATEGORY_OTHER_DISPLAY_NAME = "Other";
+    public static final String ENDPOINT_CATEGORY_TOBACCO_DISPLAY_NAME = "Tobacco";
 
     // Endpoint category names
     private static final FriendlyName ENDPOINT_CATEGORY_ANIMAL_AND_VETERINARY_NAME = new FriendlyName(
@@ -172,8 +169,10 @@ public class OpenFDAAPI {
             )
     );
 
+    private static final String FILE_MANIFEST_URL_STRING = "https://api.fda.gov/download.json";
+
     private static Map<String, EndpointCategory> endpointCategories = null;
-    private static Map<String, Endpoint> endpoints = null;
+    private static Map<FriendlyName, Map<String, Endpoint>> endpoints = null;
 
     @NonNull
     public static Map<String, EndpointCategory> getEndpointCategories() {
@@ -195,9 +194,13 @@ public class OpenFDAAPI {
     public static Map<String, Endpoint> getEndpoints(@NonNull EndpointCategory endpointCategory) {
         if (null == endpoints) {
             endpoints = new HashMap<>();
+        }
+
+        if (null == endpoints.get(endpointCategory.friendlyName())) {
+            endpoints.put(endpointCategory.friendlyName(), new HashMap<>());
             final List<FriendlyName> endpointFriendlyNames = ENDPOINT_CATEGORY_ENDPOINTS.get(endpointCategory.friendlyName());
             for (final FriendlyName endpointFriendlyName : endpointFriendlyNames) {
-                endpoints.put(
+                endpoints.get(endpointCategory.friendlyName()).put(
                         endpointFriendlyName.displayName(),
                         new Endpoint(
                                 endpointFriendlyName,
@@ -205,6 +208,11 @@ public class OpenFDAAPI {
                         ));
             }
         }
-        return endpoints;
+        return endpoints.get(endpointCategory.friendlyName());
+    }
+
+    @NonNull
+    public static String getFileManifestUrlString() {
+        return FILE_MANIFEST_URL_STRING;
     }
 }

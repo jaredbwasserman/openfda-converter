@@ -1,6 +1,6 @@
 # openFDA Converter
 
-Downloads data from https://api.fda.gov/download.json and converts the data to various formats.
+Downloads data from the [openFDA API](https://api.fda.gov/download.json) and converts the data to various formats.
 
 ## References
 
@@ -36,3 +36,4 @@ Downloads data from https://api.fda.gov/download.json and converts the data to v
 14. Need to account for the Excel hard limit on the number of rows
 15. Lock the interface when it is downloading and processing
 16. Open folder showing Excel files at the end
+17. Add `excel` package for writing Excel files

@@ -6,6 +6,7 @@ public class EndpointDownloadClientFactory {
     public static EndpointDownloadClient getEndpointDownloadClient() {
         if (null == forkJoinEndpointDownloadClient) {
             forkJoinEndpointDownloadClient = new ForkJoinEndpointDownloadClient(
+                    FileManifestClientFactory.getFileManifestClient(),
                     FileDownloadClientFactory.getFileDownloadClient()
             );
         }
