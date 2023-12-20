@@ -9,120 +9,120 @@ import java.util.Map;
 // See https://open.fda.gov/apis/
 public class OpenFDAAPI {
     // Endpoint display names
-    public static final String ENDPOINT_ADVERSE_EVENTS_DISPLAY_NAME = "Adverse Events";
-    public static final String ENDPOINT_PRODUCT_LABELING_DISPLAY_NAME = "Product Labeling";
-    public static final String ENDPOINT_NDC_DIRECTORY_DISPLAY_NAME = "NDC Directory";
-    public static final String ENDPOINT_RECALL_ENFORCEMENT_REPORTS_DISPLAY_NAME = "Recall Enforcement Reports";
-    public static final String ENDPOINT_DRUGS_AT_FDA_DISPLAY_NAME = "Drugs@FDA";
-    public static final String ENDPOINT_510_K_DISPLAY_NAME = "510(k)";
-    public static final String ENDPOINT_CLASSIFICATION_DISPLAY_NAME = "Classification";
-    public static final String ENDPOINT_PRE_MARKET_APPROVAL_DISPLAY_NAME = "Pre-market Approval";
-    public static final String ENDPOINT_RECALLS_DISPLAY_NAME = "Recalls";
-    public static final String ENDPOINT_REGISTRATIONS_AND_LISTINGS_DISPLAY_NAME = "Registrations and Listings";
-    public static final String ENDPOINT_COVID_19_SEROLOGICAL_TESTING_EVALUATIONS_DISPLAY_NAME = "COVID-19 Serological Testing Evaluations";
-    public static final String ENDPOINT_UNIQUE_DEVICE_IDENTIFIER_DISPLAY_NAME = "Unique Device Identifier";
-    public static final String ENDPOINT_NSDE_DISPLAY_NAME = "NSDE";
-    public static final String ENDPOINT_SUBSTANCE_DATA_REPORTS_DISPLAY_NAME = "Substance Data Reports";
-    public static final String ENDPOINT_UNII_DISPLAY_NAME = "UNII";
-    public static final String ENDPOINT_PROBLEM_REPORTS_DISPLAY_NAME = "Problem Reports";
+    public static final String ENDPOINT_ADVERSE_EVENTS = "Adverse Events";
+    public static final String ENDPOINT_PRODUCT_LABELING = "Product Labeling";
+    public static final String ENDPOINT_NDC_DIRECTORY = "NDC Directory";
+    public static final String ENDPOINT_RECALL_ENFORCEMENT_REPORTS = "Recall Enforcement Reports";
+    public static final String ENDPOINT_DRUGS_AT_FDA = "Drugs@FDA";
+    public static final String ENDPOINT_510_K = "510(k)";
+    public static final String ENDPOINT_CLASSIFICATION = "Classification";
+    public static final String ENDPOINT_PRE_MARKET_APPROVAL = "Pre-market Approval";
+    public static final String ENDPOINT_RECALLS = "Recalls";
+    public static final String ENDPOINT_REGISTRATIONS_AND_LISTINGS = "Registrations and Listings";
+    public static final String ENDPOINT_COVID_19_SEROLOGICAL_TESTING_EVALUATIONS = "COVID-19 Serological Testing Evaluations";
+    public static final String ENDPOINT_UNIQUE_DEVICE_IDENTIFIER = "Unique Device Identifier";
+    public static final String ENDPOINT_NSDE = "NSDE";
+    public static final String ENDPOINT_SUBSTANCE_DATA_REPORTS = "Substance Data Reports";
+    public static final String ENDPOINT_UNII = "UNII";
+    public static final String ENDPOINT_PROBLEM_REPORTS = "Problem Reports";
 
     // Endpoint names
     private static final FriendlyName ENDPOINT_ADVERSE_EVENTS_NAME = new FriendlyName(
-            ENDPOINT_ADVERSE_EVENTS_DISPLAY_NAME,
+            ENDPOINT_ADVERSE_EVENTS,
             "event"
     );
     private static final FriendlyName ENDPOINT_PRODUCT_LABELING_NAME = new FriendlyName(
-            ENDPOINT_PRODUCT_LABELING_DISPLAY_NAME,
+            ENDPOINT_PRODUCT_LABELING,
             "label"
     );
     private static final FriendlyName ENDPOINT_NDC_DIRECTORY_NAME = new FriendlyName(
-            ENDPOINT_NDC_DIRECTORY_DISPLAY_NAME,
+            ENDPOINT_NDC_DIRECTORY,
             "ndc"
     );
     private static final FriendlyName ENDPOINT_RECALL_ENFORCEMENT_REPORTS_NAME = new FriendlyName(
-            ENDPOINT_RECALL_ENFORCEMENT_REPORTS_DISPLAY_NAME,
+            ENDPOINT_RECALL_ENFORCEMENT_REPORTS,
             "enforcement"
     );
     private static final FriendlyName ENDPOINT_DRUGS_AT_FDA_NAME = new FriendlyName(
-            ENDPOINT_DRUGS_AT_FDA_DISPLAY_NAME,
+            ENDPOINT_DRUGS_AT_FDA,
             "drugsfda"
     );
     private static final FriendlyName ENDPOINT_510_K_NAME = new FriendlyName(
-            ENDPOINT_510_K_DISPLAY_NAME,
+            ENDPOINT_510_K,
             "510k"
     );
     private static final FriendlyName ENDPOINT_CLASSIFICATION_NAME = new FriendlyName(
-            ENDPOINT_CLASSIFICATION_DISPLAY_NAME,
+            ENDPOINT_CLASSIFICATION,
             "classification"
     );
     private static final FriendlyName ENDPOINT_PRE_MARKET_APPROVAL_NAME = new FriendlyName(
-            ENDPOINT_PRE_MARKET_APPROVAL_DISPLAY_NAME,
+            ENDPOINT_PRE_MARKET_APPROVAL,
             "pma"
     );
     private static final FriendlyName ENDPOINT_RECALLS_NAME = new FriendlyName(
-            ENDPOINT_RECALLS_DISPLAY_NAME,
+            ENDPOINT_RECALLS,
             "recall"
     );
     private static final FriendlyName ENDPOINT_REGISTRATIONS_AND_LISTINGS_NAME = new FriendlyName(
-            ENDPOINT_REGISTRATIONS_AND_LISTINGS_DISPLAY_NAME,
+            ENDPOINT_REGISTRATIONS_AND_LISTINGS,
             "registrationlisting"
     );
     private static final FriendlyName ENDPOINT_COVID_19_SEROLOGICAL_TESTING_EVALUATIONS_NAME = new FriendlyName(
-            ENDPOINT_COVID_19_SEROLOGICAL_TESTING_EVALUATIONS_DISPLAY_NAME,
+            ENDPOINT_COVID_19_SEROLOGICAL_TESTING_EVALUATIONS,
             "covid19serology"
     );
     private static final FriendlyName ENDPOINT_UNIQUE_DEVICE_IDENTIFIER_NAME = new FriendlyName(
-            ENDPOINT_UNIQUE_DEVICE_IDENTIFIER_DISPLAY_NAME,
+            ENDPOINT_UNIQUE_DEVICE_IDENTIFIER,
             "udi"
     );
     private static final FriendlyName ENDPOINT_NSDE_NAME = new FriendlyName(
-            ENDPOINT_NSDE_DISPLAY_NAME,
+            ENDPOINT_NSDE,
             "nsde"
     );
     private static final FriendlyName ENDPOINT_SUBSTANCE_DATA_REPORTS_NAME = new FriendlyName(
-            ENDPOINT_SUBSTANCE_DATA_REPORTS_DISPLAY_NAME,
+            ENDPOINT_SUBSTANCE_DATA_REPORTS,
             "substance"
     );
     private static final FriendlyName ENDPOINT_UNII_NAME = new FriendlyName(
-            ENDPOINT_UNII_DISPLAY_NAME,
+            ENDPOINT_UNII,
             "unii"
     );
     private static final FriendlyName ENDPOINT_PROBLEM_REPORTS_NAME = new FriendlyName(
-            ENDPOINT_PROBLEM_REPORTS_DISPLAY_NAME,
+            ENDPOINT_PROBLEM_REPORTS,
             "problem"
     );
 
     // Endpoint category display names
-    public static final String ENDPOINT_CATEGORY_ANIMAL_AND_VETERINARY_DISPLAY_NAME = "Animal & Veterinary";
-    public static final String ENDPOINT_CATEGORY_DRUG_DISPLAY_NAME = "Drug";
-    public static final String ENDPOINT_CATEGORY_DEVICE_DISPLAY_NAME = "Device";
-    public static final String ENDPOINT_CATEGORY_FOOD_DISPLAY_NAME = "Food";
-    public static final String ENDPOINT_CATEGORY_OTHER_DISPLAY_NAME = "Other";
-    public static final String ENDPOINT_CATEGORY_TOBACCO_DISPLAY_NAME = "Tobacco";
+    public static final String ENDPOINT_CATEGORY_ANIMAL_AND_VETERINARY = "Animal & Veterinary";
+    public static final String ENDPOINT_CATEGORY_DRUG = "Drug";
+    public static final String ENDPOINT_CATEGORY_DEVICE = "Device";
+    public static final String ENDPOINT_CATEGORY_FOOD = "Food";
+    public static final String ENDPOINT_CATEGORY_OTHER = "Other";
+    public static final String ENDPOINT_CATEGORY_TOBACCO = "Tobacco";
 
     // Endpoint category names
     private static final FriendlyName ENDPOINT_CATEGORY_ANIMAL_AND_VETERINARY_NAME = new FriendlyName(
-            ENDPOINT_CATEGORY_ANIMAL_AND_VETERINARY_DISPLAY_NAME,
+            ENDPOINT_CATEGORY_ANIMAL_AND_VETERINARY,
             "animalandveterinary"
     );
     private static final FriendlyName ENDPOINT_CATEGORY_DRUG_NAME = new FriendlyName(
-            ENDPOINT_CATEGORY_DRUG_DISPLAY_NAME,
+            ENDPOINT_CATEGORY_DRUG,
             "drug"
     );
     private static final FriendlyName ENDPOINT_CATEGORY_DEVICE_NAME = new FriendlyName(
-            ENDPOINT_CATEGORY_DEVICE_DISPLAY_NAME,
+            ENDPOINT_CATEGORY_DEVICE,
             "device"
     );
     private static final FriendlyName ENDPOINT_CATEGORY_FOOD_NAME = new FriendlyName(
-            ENDPOINT_CATEGORY_FOOD_DISPLAY_NAME,
+            ENDPOINT_CATEGORY_FOOD,
             "food"
     );
     private static final FriendlyName ENDPOINT_CATEGORY_OTHER_NAME = new FriendlyName(
-            ENDPOINT_CATEGORY_OTHER_DISPLAY_NAME,
+            ENDPOINT_CATEGORY_OTHER,
             "other"
     );
     private static final FriendlyName ENDPOINT_CATEGORY_TOBACCO_NAME = new FriendlyName(
-            ENDPOINT_CATEGORY_TOBACCO_DISPLAY_NAME,
+            ENDPOINT_CATEGORY_TOBACCO,
             "tobacco"
     );
 

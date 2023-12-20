@@ -7,6 +7,9 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.ForkJoinPool;
+import java.util.stream.Collectors;
 
 public record ForkJoinEndpointDownloadClient(
         FileManifestClient fileManifestClient,
@@ -32,14 +35,51 @@ public record ForkJoinEndpointDownloadClient(
             return Collections.emptyList();
         }
 
-        // TODO: Implement me
+        // Next, download all the files
+        List<String> destinationFilePathStrings;
+        try {
+            destinationFilePathStrings = new ForkJoinPool(fileUrlStrings.size())
+                    .submit(() -> processFileUrlStrings(fileUrlStrings, destinationDirectoryPathString))
+                    .get();
+        } catch (Exception exception) {
+            logger.error(
+                    "Error while downloading files for endpoint {} with files {} to {}",
+                    endpoint,
+                    fileUrlStrings,
+                    destinationDirectoryPathString,
+                    exception
+            );
+            return Collections.emptyList();
+        }
 
-        // TODO: Fix me
         logger.info(
                 "Download finished: {} -> {}",
                 endpoint,
                 destinationDirectoryPathString
         );
-        return Collections.emptyList();
+        return destinationFilePathStrings;
+    }
+
+    @NonNull
+    private List<String> processFileUrlStrings(@NonNull List<String> fileUrlStrings, @NonNull String destinationDirectoryPathString) {
+        return fileUrlStrings
+                .stream()
+                .parallel()
+                .map((fileUrlString) -> processFileUrlString(fileUrlString, destinationDirectoryPathString))
+                .collect(Collectors.toList());
+    }
+
+    @NonNull
+    private String processFileUrlString(@NonNull String fileUrlString, @NonNull String destinationDirectoryPathString) {
+        final Optional<String> filePathStringOptional = fileDownloadClient.downloadFile(
+                fileUrlString,
+                destinationDirectoryPathString
+        );
+        if (filePathStringOptional.isEmpty()) {
+            throw new RuntimeException(String.format(
+                    "Unable to download file %s to directory %s", fileUrlString, destinationDirectoryPathString
+            ));
+        }
+        return filePathStringOptional.get();
     }
 }

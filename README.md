@@ -33,6 +33,7 @@ Downloads data from the [openFDA API](https://api.fda.gov/download.json) and con
 12. Make a script checked in separately that can be used to one-off generate the list of fields
     1. Could be some test(s) to verify the constants are correct
 13. Make sure to delete ALL intermediate files
+    1. Even on failure
 14. Need to account for the Excel hard limit on the number of rows
 15. Lock the interface when it is downloading and processing
 16. Open folder showing Excel files at the end
