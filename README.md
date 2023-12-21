@@ -53,3 +53,4 @@ Downloads data from the [openFDA API](https://api.fda.gov/download.json) and con
 18. Fix spacing in generated files to make indentation correct compared to formatter
 19. Optimize so that the transformations take place in each thread rather than waiting for the whole set of files to
     download and having single-threaded operation over all files
+20. The `openfda` logic does not work for all datasets, for example drug event, need to generalize
