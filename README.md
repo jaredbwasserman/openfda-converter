@@ -46,4 +46,10 @@ Downloads data from the [openFDA API](https://api.fda.gov/download.json) and con
 13. Lock the interface when it is downloading and processing
 14. Open folder showing Excel files at the end
 15. Add `excel` package for writing Excel files
-16. Add keys to `Endpoint` and `OpenFDAAPI`
+16. Add keys to `OpenFDAAPI`
+    1. Need to add everything except drug label
+17. Fix NullPointer in `fromEndpointDatasetRaw`
+    1. Can reproduce with drug event
+18. Fix spacing in generated files to make indentation correct compared to formatter
+19. Optimize so that the transformations take place in each thread rather than waiting for the whole set of files to
+    download and having single-threaded operation over all files

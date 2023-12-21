@@ -31,6 +31,18 @@ public class EndpointDatasetKeysGenerator {
         final EndpointDownloadClient endpointDownloadClient = EndpointDownloadClientFactory.getEndpointDownloadClient();
         for (final EndpointCategory endpointCategory : OpenFDAAPI.getEndpointCategories()) {
             for (final Endpoint endpoint : endpointCategory.endpoints()) {
+
+                // TODO: Remove skipping
+//                if (!endpoint.endpointCategoryFriendlyName().internalName().equals("drug") ||
+//                        !endpoint.friendlyName().internalName().equals("label")) {
+//                    logger.info(
+//                            "Skip {}-{}",
+//                            endpoint.endpointCategoryFriendlyName().displayName(),
+//                            endpoint.friendlyName().displayName()
+//                    );
+//                    continue;
+//                }
+
                 final String endpointDatasetKeysName = endpoint.getConcatenatedName() + "Keys";
                 logger.info(
                         "Keys generation starting: {}",

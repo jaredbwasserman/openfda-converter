@@ -19,7 +19,7 @@ public record ForkJoinEndpointDownloadClient(
         FileZipper fileZipper) implements EndpointDownloadClient {
     private static final Logger logger = LoggerFactory.getLogger(ForkJoinEndpointDownloadClient.class);
 
-    private static final int MAX_THREADS = 20;
+    private static final int MAX_THREADS = 100;
 
     @Override
     @NonNull

@@ -1,7 +1,9 @@
 package com.jaredbwasserman.openfda.api;
 
+import com.jaredbwasserman.openfda.model.generated.DrugLabelKeys;
 import lombok.NonNull;
 
+import java.util.Collections;
 import java.util.List;
 
 // See https://open.fda.gov/apis/
@@ -105,7 +107,8 @@ public class OpenFDAAPI {
                     List.of(
                             new Endpoint(
                                     ENDPOINT_ADVERSE_EVENTS_NAME,
-                                    ENDPOINT_CATEGORY_ANIMAL_AND_VETERINARY_NAME
+                                    ENDPOINT_CATEGORY_ANIMAL_AND_VETERINARY_NAME,
+                                    Collections.emptyList()
                             )
                     )
             ),
@@ -114,23 +117,28 @@ public class OpenFDAAPI {
                     List.of(
                             new Endpoint(
                                     ENDPOINT_ADVERSE_EVENTS_NAME,
-                                    ENDPOINT_CATEGORY_DRUG_NAME
+                                    ENDPOINT_CATEGORY_DRUG_NAME,
+                                    Collections.emptyList()
                             ),
                             new Endpoint(
                                     ENDPOINT_PRODUCT_LABELING_NAME,
-                                    ENDPOINT_CATEGORY_DRUG_NAME
+                                    ENDPOINT_CATEGORY_DRUG_NAME,
+                                    DrugLabelKeys.getKeys()
                             ),
                             new Endpoint(
                                     ENDPOINT_NDC_DIRECTORY_NAME,
-                                    ENDPOINT_CATEGORY_DRUG_NAME
+                                    ENDPOINT_CATEGORY_DRUG_NAME,
+                                    Collections.emptyList()
                             ),
                             new Endpoint(
                                     ENDPOINT_RECALL_ENFORCEMENT_REPORTS_NAME,
-                                    ENDPOINT_CATEGORY_DRUG_NAME
+                                    ENDPOINT_CATEGORY_DRUG_NAME,
+                                    Collections.emptyList()
                             ),
                             new Endpoint(
                                     ENDPOINT_DRUGS_AT_FDA_NAME,
-                                    ENDPOINT_CATEGORY_DRUG_NAME
+                                    ENDPOINT_CATEGORY_DRUG_NAME,
+                                    Collections.emptyList()
                             )
                     )
             ),
@@ -139,39 +147,48 @@ public class OpenFDAAPI {
                     List.of(
                             new Endpoint(
                                     ENDPOINT_510K_NAME,
-                                    ENDPOINT_CATEGORY_DEVICE_NAME
+                                    ENDPOINT_CATEGORY_DEVICE_NAME,
+                                    Collections.emptyList()
                             ),
                             new Endpoint(
                                     ENDPOINT_CLASSIFICATION_NAME,
-                                    ENDPOINT_CATEGORY_DEVICE_NAME
+                                    ENDPOINT_CATEGORY_DEVICE_NAME,
+                                    Collections.emptyList()
                             ),
                             new Endpoint(
                                     ENDPOINT_RECALL_ENFORCEMENT_REPORTS_NAME,
-                                    ENDPOINT_CATEGORY_DEVICE_NAME
+                                    ENDPOINT_CATEGORY_DEVICE_NAME,
+                                    Collections.emptyList()
                             ),
                             new Endpoint(
                                     ENDPOINT_ADVERSE_EVENTS_NAME,
-                                    ENDPOINT_CATEGORY_DEVICE_NAME
+                                    ENDPOINT_CATEGORY_DEVICE_NAME,
+                                    Collections.emptyList()
                             ),
                             new Endpoint(
                                     ENDPOINT_PRE_MARKET_APPROVAL_NAME,
-                                    ENDPOINT_CATEGORY_DEVICE_NAME
+                                    ENDPOINT_CATEGORY_DEVICE_NAME,
+                                    Collections.emptyList()
                             ),
                             new Endpoint(
                                     ENDPOINT_RECALLS_NAME,
-                                    ENDPOINT_CATEGORY_DEVICE_NAME
+                                    ENDPOINT_CATEGORY_DEVICE_NAME,
+                                    Collections.emptyList()
                             ),
                             new Endpoint(
                                     ENDPOINT_REGISTRATIONS_AND_LISTINGS_NAME,
-                                    ENDPOINT_CATEGORY_DEVICE_NAME
+                                    ENDPOINT_CATEGORY_DEVICE_NAME,
+                                    Collections.emptyList()
                             ),
                             new Endpoint(
                                     ENDPOINT_COVID_19_SEROLOGICAL_TESTING_EVALUATIONS_NAME,
-                                    ENDPOINT_CATEGORY_DEVICE_NAME
+                                    ENDPOINT_CATEGORY_DEVICE_NAME,
+                                    Collections.emptyList()
                             ),
                             new Endpoint(
                                     ENDPOINT_UNIQUE_DEVICE_IDENTIFIER_NAME,
-                                    ENDPOINT_CATEGORY_DEVICE_NAME
+                                    ENDPOINT_CATEGORY_DEVICE_NAME,
+                                    Collections.emptyList()
                             )
                     )
             ),
@@ -180,11 +197,13 @@ public class OpenFDAAPI {
                     List.of(
                             new Endpoint(
                                     ENDPOINT_RECALL_ENFORCEMENT_REPORTS_NAME,
-                                    ENDPOINT_CATEGORY_FOOD_NAME
+                                    ENDPOINT_CATEGORY_FOOD_NAME,
+                                    Collections.emptyList()
                             ),
                             new Endpoint(
                                     ENDPOINT_ADVERSE_EVENTS_NAME,
-                                    ENDPOINT_CATEGORY_FOOD_NAME
+                                    ENDPOINT_CATEGORY_FOOD_NAME,
+                                    Collections.emptyList()
                             )
                     )
             ),
@@ -193,15 +212,18 @@ public class OpenFDAAPI {
                     List.of(
                             new Endpoint(
                                     ENDPOINT_NSDE_NAME,
-                                    ENDPOINT_CATEGORY_OTHER_NAME
+                                    ENDPOINT_CATEGORY_OTHER_NAME,
+                                    Collections.emptyList()
                             ),
                             new Endpoint(
                                     ENDPOINT_SUBSTANCE_DATA_REPORTS_NAME,
-                                    ENDPOINT_CATEGORY_OTHER_NAME
+                                    ENDPOINT_CATEGORY_OTHER_NAME,
+                                    Collections.emptyList()
                             ),
                             new Endpoint(
                                     ENDPOINT_UNII_NAME,
-                                    ENDPOINT_CATEGORY_OTHER_NAME
+                                    ENDPOINT_CATEGORY_OTHER_NAME,
+                                    Collections.emptyList()
                             )
                     )
             ),
@@ -210,7 +232,8 @@ public class OpenFDAAPI {
                     List.of(
                             new Endpoint(
                                     ENDPOINT_PROBLEM_REPORTS_NAME,
-                                    ENDPOINT_CATEGORY_TOBACCO_NAME
+                                    ENDPOINT_CATEGORY_TOBACCO_NAME,
+                                    Collections.emptyList()
                             )
                     )
             )

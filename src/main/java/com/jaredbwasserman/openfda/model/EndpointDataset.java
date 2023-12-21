@@ -45,7 +45,7 @@ public record EndpointDataset(
                     .entrySet()
                     .stream()
                     .filter((entry) -> !entry.getKey().equals(OPEN_FDA_KEY))
-                    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue))
+                    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)) // TODO: Fix Null Pointer
             );
 
             @SuppressWarnings("unchecked") final Map<String, Object> rawResultOpenFDA = (Map<String, Object>) rawResult.getOrDefault(OPEN_FDA_KEY, null);
