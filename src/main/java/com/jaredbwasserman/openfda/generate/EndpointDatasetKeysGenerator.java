@@ -121,10 +121,10 @@ public class EndpointDatasetKeysGenerator {
         final Path destinationPath = Paths.get(String.join(
                 "/",
                 destinationDirectoryPathString,
-                endpointDatasetKeysName + ".txt"
+                endpointDatasetKeysName + ".java"
         ));
         try {
-            Files.write(destinationPath, endpointDatasetKeys);
+            Files.writeString(destinationPath, getFileContents(endpointDatasetKeysName, endpointDatasetKeys));
         } catch (Exception exception) {
             logger.error(
                     "Error while writing keys for {} to {}",
@@ -133,5 +133,33 @@ public class EndpointDatasetKeysGenerator {
                     exception
             );
         }
+    }
+
+    private static String getFileContents(@NonNull String endpointDatasetKeysName,
+                                          @NonNull List<String> endpointDatasetKeys) {
+        return String.format("""
+                        package com.jaredbwasserman.openfda.model.generated;
+                                        
+                        import lombok.NonNull;
+                                        
+                        import java.util.List;
+                                        
+                        public class %s {
+                            @NonNull
+                            public static List<String> getKeys() {
+                                return List.of(
+                                    %s
+                                );
+                            }
+                        }
+                        """,
+                endpointDatasetKeysName,
+                String.join(
+                        ",\n            ",
+                        endpointDatasetKeys.stream()
+                                .map((endpointDatasetKey) -> "\"" + endpointDatasetKey + "\"")
+                                .toList()
+                )
+        );
     }
 }

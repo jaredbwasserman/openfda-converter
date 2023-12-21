@@ -4,8 +4,10 @@ Downloads data from the [openFDA API](https://api.fda.gov/download.json) and con
 
 ## Generating Keys
 
-1. Run `EndpointDatasetKeysGenerator.generateKeysForAllEndpoints`
-2.
+1. Go to `com.jaredbwasserman.openfda.generate.EndpointDatasetKeysGeneratorTest`
+2. Supply a value for `destinationDirectoryPathString`
+3. Run `testEndpointDatasetKeysGenerator`
+4. Move the generated files into the `com.jaredbwasserman.openfda.model.generated` package
 
 ## References
 
@@ -45,4 +47,3 @@ Downloads data from the [openFDA API](https://api.fda.gov/download.json) and con
 14. Open folder showing Excel files at the end
 15. Add `excel` package for writing Excel files
 16. Add keys to `Endpoint` and `OpenFDAAPI`
-17. Finish writing steps for `Generating Keys` in this file
