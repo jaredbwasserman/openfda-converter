@@ -7,9 +7,11 @@ import org.slf4j.LoggerFactory;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Optional;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 public class SimpleFileZipper implements FileZipper {
     private static final Logger logger = LoggerFactory.getLogger(SimpleFileZipper.class);
@@ -28,16 +30,41 @@ public class SimpleFileZipper implements FileZipper {
             return Optional.empty();
         }
 
+        // Source file name
+        String sourceFileName;
+        try (final ZipFile sourceZipFile = new ZipFile(sourceZipFilePathString)) {
+            final List<String> sourceZipFileEntries = sourceZipFile
+                    .stream()
+                    .map(ZipEntry::getName)
+                    .toList();
+
+            if (1 != sourceZipFileEntries.size()) {
+                throw new RuntimeException(String.format(
+                        "There should be exactly 1 file in %s but there were %d files", sourceZipFilePathString, sourceZipFileEntries.size()
+                ));
+            }
+
+            sourceFileName = sourceZipFileEntries.get(0);
+        } catch (Exception exception) {
+            logger.error(
+                    "Error while computing source zip file name for {}",
+                    sourceZipFilePathString,
+                    exception
+            );
+            return Optional.empty();
+        }
+
+        // Destination file path
         final String destinationFilePathString = sourceZipFilePathString.substring(
                 0,
                 sourceZipFilePathString.lastIndexOf(ZIP_SUFFIX)
         );
-        final Path destinationFilePath = Paths.get(destinationFilePathString);
 
+        // Extract
         try (final FileSystem zipFileSystem = FileSystems.newFileSystem(Paths.get(sourceZipFilePathString))) {
             Files.copy(
-                    zipFileSystem.getPath(destinationFilePath.getFileName().toString()),
-                    destinationFilePath
+                    zipFileSystem.getPath(sourceFileName),
+                    Paths.get(destinationFilePathString)
             );
             return Optional.of(destinationFilePathString);
         } catch (Exception exception) {

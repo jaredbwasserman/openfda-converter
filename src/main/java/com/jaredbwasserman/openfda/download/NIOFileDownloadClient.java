@@ -72,11 +72,10 @@ public class NIOFileDownloadClient implements FileDownloadClient {
 
     @NonNull
     private String getDestinationFilePathString(@NonNull URL sourceUrl, @NonNull String destinationDirectoryPathString) {
-        final String[] sourcePathParts = sourceUrl.getPath().split("/");
         return String.join(
                 "/",
                 destinationDirectoryPathString,
-                sourcePathParts[sourcePathParts.length - 1]
+                sourceUrl.getPath().replace("/", "-").replaceFirst("^-", "")
         );
     }
 }

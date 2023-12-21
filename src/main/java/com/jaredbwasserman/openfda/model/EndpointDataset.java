@@ -35,7 +35,7 @@ public record EndpointDataset(
             return Optional.empty();
         }
 
-        return Optional.of(EndpointDataset.fromEndpointDatasetRaw(endpointDatasetRaw));
+        return Optional.of(fromEndpointDatasetRaw(endpointDatasetRaw));
     }
 
     private static EndpointDataset fromEndpointDatasetRaw(EndpointDatasetRaw endpointDatasetRaw) {
@@ -48,10 +48,12 @@ public record EndpointDataset(
                     .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue))
             );
 
-            @SuppressWarnings("unchecked") final Map<String, Object> rawResultOpenFDA = (Map<String, Object>) rawResult.get(OPEN_FDA_KEY);
-            rawResultOpenFDA.forEach((key, value) ->
-                    result.put(String.join(".", OPEN_FDA_KEY, key), value)
-            );
+            @SuppressWarnings("unchecked") final Map<String, Object> rawResultOpenFDA = (Map<String, Object>) rawResult.getOrDefault(OPEN_FDA_KEY, null);
+            if (null != rawResultOpenFDA) {
+                rawResultOpenFDA.forEach((key, value) ->
+                        result.put(String.join(".", OPEN_FDA_KEY, key), value)
+                );
+            }
 
             results.add(result);
         }

@@ -1,12 +1,12 @@
 package com.jaredbwasserman.openfda.download;
 
 import com.jaredbwasserman.openfda.api.Endpoint;
+import com.jaredbwasserman.openfda.util.FileUtil;
 import com.jaredbwasserman.openfda.zip.FileZipper;
 import lombok.NonNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -95,16 +95,7 @@ public record ForkJoinEndpointDownloadClient(
         }
 
         // Delete the zipped file
-        final File zippedFile = new File(zippedFilePathString);
-        try {
-            zippedFile.delete();
-        } catch (Exception exception) {
-            logger.warn(
-                    "Could not delete zipped file {}",
-                    zippedFile,
-                    exception
-            );
-        }
+        FileUtil.deleteFile(zippedFilePathString);
 
         return unzippedFilePathStringOptional.get();
     }

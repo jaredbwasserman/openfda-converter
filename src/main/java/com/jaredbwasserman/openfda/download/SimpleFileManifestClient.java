@@ -6,6 +6,7 @@ import com.jaredbwasserman.openfda.api.OpenFDAAPI;
 import com.jaredbwasserman.openfda.model.FileManifest;
 import com.jaredbwasserman.openfda.model.FileManifestDataset;
 import com.jaredbwasserman.openfda.model.FileManifestDatasetPartition;
+import com.jaredbwasserman.openfda.util.FileUtil;
 import lombok.NonNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,15 +56,7 @@ public record SimpleFileManifestClient(
         }
 
         // Next, delete the file manifest file
-        try {
-            fileManifestFile.delete();
-        } catch (Exception exception) {
-            logger.warn(
-                    "Could not delete file manifest file {}",
-                    fileManifestFile,
-                    exception
-            );
-        }
+        FileUtil.deleteFile(fileManifestFile);
 
         // Finally, parse the file manifest to get the list of files to download
         return getFileUrlStrings(endpoint, fileManifest);
@@ -71,7 +64,7 @@ public record SimpleFileManifestClient(
 
     @NonNull
     private List<String> getFileUrlStrings(@NonNull Endpoint endpoint, @NonNull FileManifest fileManifest) {
-        final String endpointCategoryInternalName = endpoint.endpointCategory().friendlyName().internalName();
+        final String endpointCategoryInternalName = endpoint.endpointCategoryFriendlyName().internalName();
         final String endpointInternalName = endpoint.friendlyName().internalName();
 
         final Map<String, FileManifestDataset> fileManifestDatasets = fileManifest.results().getOrDefault(endpointCategoryInternalName, null);
