@@ -3,10 +3,15 @@ package com.jaredbwasserman.openfda;
 import com.jaredbwasserman.openfda.api.OpenFDAAPI;
 import com.jaredbwasserman.openfda.download.EndpointDownloadClient;
 import com.jaredbwasserman.openfda.download.EndpointDownloadClientFactory;
+import com.jaredbwasserman.openfda.json.JsonHelperFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class App {
     private static final Logger logger = LoggerFactory.getLogger(App.class);
@@ -23,5 +28,14 @@ public class App {
         } else {
             logger.warn("Download unsuccessful");
         }
+
+        // TODO: Fix me
+        final Set<String> drugLabelKeys = new HashSet<>();
+        for (final String endpointFile : endpointFiles) {
+            drugLabelKeys.addAll(JsonHelperFactory.getJsonHelper().getUniqueKeysForEndpointDataset(endpointFile));
+        }
+        final List<String> drugLabelKeysList = new ArrayList<>(drugLabelKeys);
+        Collections.sort(drugLabelKeysList);
+        drugLabelKeysList.forEach(logger::info);
     }
 }
