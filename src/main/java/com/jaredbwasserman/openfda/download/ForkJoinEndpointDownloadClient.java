@@ -19,6 +19,8 @@ public record ForkJoinEndpointDownloadClient(
         FileZipper fileZipper) implements EndpointDownloadClient {
     private static final Logger logger = LoggerFactory.getLogger(ForkJoinEndpointDownloadClient.class);
 
+    private static final int MAX_THREADS = 20;
+
     @Override
     @NonNull
     public List<String> downloadAndUnzipEndpointFiles(@NonNull Endpoint endpoint, @NonNull String destinationDirectoryPathString) {
@@ -41,7 +43,7 @@ public record ForkJoinEndpointDownloadClient(
         // Next, download all the files
         List<String> destinationFilePathStrings;
         try {
-            destinationFilePathStrings = new ForkJoinPool(fileUrlStrings.size())
+            destinationFilePathStrings = new ForkJoinPool(Math.min(fileUrlStrings.size(), MAX_THREADS))
                     .submit(() -> processFileUrlStrings(fileUrlStrings, destinationDirectoryPathString))
                     .get();
         } catch (Exception exception) {

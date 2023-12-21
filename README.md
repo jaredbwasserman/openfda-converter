@@ -4,8 +4,8 @@ Downloads data from the [openFDA API](https://api.fda.gov/download.json) and con
 
 ## Generating Keys
 
-1. Go to `com.jaredbwasserman.openfda.generate.EndpointDatasetKeysGeneratorTest`
-2. Supply a value for `destinationDirectoryPathString`
+1. Supply a value for the `KEYS_GENERATOR_PATH` environment variable
+2. Go to `com.jaredbwasserman.openfda.generate.EndpointDatasetKeysGeneratorTest`
 3. Run `testEndpointDatasetKeysGenerator`
 4. Move the generated files into the `com.jaredbwasserman.openfda.model.generated` package
 

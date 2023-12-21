@@ -7,7 +7,6 @@ public class EndpointDatasetKeysGeneratorTest {
     @Disabled
     @Test
     public void testEndpointDatasetKeysGenerator() {
-        final String destinationDirectoryPathString = ""; // TODO: Replace with destination directory
-        EndpointDatasetKeysGenerator.generateKeysForAllEndpoints(destinationDirectoryPathString);
+        EndpointDatasetKeysGenerator.generateKeysForAllEndpoints(System.getenv("KEYS_GENERATOR_PATH"));
     }
 }
