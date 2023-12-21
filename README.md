@@ -44,5 +44,5 @@ Downloads data from the [openFDA API](https://api.fda.gov/download.json) and con
 13. Lock the interface when it is downloading and processing
 14. Open folder showing Excel files at the end
 15. Add `excel` package for writing Excel files
-16. Add fields to `Endpoint` and `OpenFDAAPI`
+16. Add keys to `Endpoint` and `OpenFDAAPI`
 17. Finish writing steps for `Generating Keys` in this file
