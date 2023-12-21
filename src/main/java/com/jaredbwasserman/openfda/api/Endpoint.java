@@ -8,7 +8,7 @@ public record Endpoint(
         @NonNull FriendlyName endpointCategoryFriendlyName) {
     @NonNull
     public String getConcatenatedName() {
-        return StringUtils.capitalize(endpointCategoryFriendlyName().internalName()) +
-                StringUtils.capitalize(friendlyName().internalName());
+        return StringUtils.capitalize(endpointCategoryFriendlyName.internalName()) +
+                StringUtils.capitalize(friendlyName.internalName());
     }
 }
