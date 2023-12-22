@@ -10,8 +10,13 @@ public record Endpoint(
         @NonNull FriendlyName endpointCategoryFriendlyName,
         @NonNull List<String> keys) {
     @NonNull
-    public String getConcatenatedName() {
+    public String getCamelCaseName() {
         return StringUtils.capitalize(endpointCategoryFriendlyName.internalName()) +
                 StringUtils.capitalize(friendlyName.internalName());
+    }
+
+    @NonNull
+    public String getHyphenatedName() {
+        return String.join("-", endpointCategoryFriendlyName.internalName(), friendlyName.internalName());
     }
 }

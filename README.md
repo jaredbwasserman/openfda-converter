@@ -29,23 +29,23 @@ Downloads data from the [openFDA API](https://api.fda.gov/download.json) and con
 4. Drop down for file format (only xlsx - should default to this - for now)
 5. Option box to discard the downloaded files after Excel file is generated
     1. This should be on by default
-6. Option for number of lines per file
+6. Option for number of lines per sheet
     1. This should default to the maximum amount and be capped between 1 and max inclusive
     2. Need to account for the Excel hard limit on the number of rows
-7. Pick the folder to download the files and put generate file into
+7. Option for number of sheets per workbook
+8. Pick the folder to download the files and put generate file into
     1. File picker directory only
-8. Button that says start (verifies the type, subtype, fields, format, download/generate location are all populated)
-9. Name of generated file is `<TYPE>-<SUBTYPE>-<yyyyMMdd>-<HHmmss>-<PART>-of-<PARTS>.<FORMAT>`
+9. Button that says start (verifies the type, subtype, fields, format, download/generate location are all populated)
+10. Name of generated file is `<TYPE>-<SUBTYPE>-<yyyyMMdd>-<HHmmss>-<PART>-of-<PARTS>.<FORMAT>`
     1. For example: `drug-label-20100416-151517-00000-of-00010.xlsx`
-10. Show progress bar since there are 11 files
+11. Show progress bar since there are 11 files
     1. For example: `Downloading file 1/11`
     2. And continue progress when it is generating the Excel file
-11. Make sure to update Maven version to correlate with GitHub release version
-12. Make sure to delete ALL intermediate files
+12. Make sure to update Maven version to correlate with GitHub release version
+13. Make sure to delete ALL intermediate files
     1. Even on failure
-13. Lock the interface when it is downloading and processing
-14. Open folder showing Excel files at the end
-15. Add `excel` package for writing Excel files
+14. Lock the interface when it is downloading and processing
+15. Open folder showing Excel files at the end
 16. Add keys to `OpenFDAAPI`
     1. Need to add everything except drug label
 17. Fix NullPointer in `fromEndpointDatasetRaw`
@@ -54,3 +54,8 @@ Downloads data from the [openFDA API](https://api.fda.gov/download.json) and con
 19. Optimize so that the transformations take place in each thread rather than waiting for the whole set of files to
     download and having single-threaded operation over all files
 20. The `openfda` logic does not work for all datasets, for example drug event, need to generalize
+21. More sophisticated code generation to avoid manually copying files would be nice
+22. Probably need support for writing certain kinds of objects to Excel to avoid any weird `toString` behavior
+23. Instead of all the generation stuff, just write a script to parse the searchable fields YAML
+    1. For example: https://open.fda.gov/apis/drug/label/searchable-fields/
+    2. And need a clever way to parse nested fields (things with `.`) because not all datasets are the same structure

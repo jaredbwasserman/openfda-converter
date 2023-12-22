@@ -43,7 +43,7 @@ public class EndpointDatasetKeysGenerator {
 //                    continue;
 //                }
 
-                final String endpointDatasetKeysName = endpoint.getConcatenatedName() + "Keys";
+                final String endpointDatasetKeysName = endpoint.getCamelCaseName() + "Keys";
                 logger.info(
                         "Keys generation starting: {}",
                         endpointDatasetKeysName
