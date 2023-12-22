@@ -76,7 +76,7 @@ Downloads data from the [openFDA API](https://api.fda.gov/download.json) and con
 27. Generalizations
     1. Add drop down for field(s) to split on, for example `openfda.package_ndc`
     2. Add ability to specify specials rules for parsing fields, for example `indications_and_usage` split characters
-    3. Custom field ordering
+    3. Custom column ordering
     4. Skipping rules, like skipping fields without `openfda`
 28. Might actually be easier to load all of this into a database
     1. The database tables would be the intermediate representation
