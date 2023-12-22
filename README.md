@@ -59,3 +59,25 @@ Downloads data from the [openFDA API](https://api.fda.gov/download.json) and con
 23. Instead of all the generation stuff, just write a script to parse the searchable fields YAML
     1. For example: https://open.fda.gov/apis/drug/label/searchable-fields/
     2. And need a clever way to parse nested fields (things with `.`) because not all datasets are the same structure
+24. Remove existing code for dealing with `openfda` and use searchable fields to come up with a more general approach
+    1. Should be able to handle fields containing a `.` and any formats that exist
+25. Can parse the searchable fields from the YAML files on the fly instead of checking those files in
+    1. Remove the generated package and associated README info
+    2. Make the `EndpointDatasetRaw` the regular one and remove the weird parsing logic
+    3. Remove fields from `Endpoint` since will parse on the fly
+26. Improvements
+    1. Add column for the originating file
+    2. Make this a tool that can be run since files are updated frequently
+    3. Alternative to scraping website automatically is ability to manually feed the label json files and have it spit
+       out the spreadsheet
+        1. Supply local files rather than needing to download each time useful if site is down or providing different
+           settings for the same input
+    4. Need to avoid capping Excel worksheet row limit
+27. Generalizations
+    1. Add drop down for field(s) to split on, for example `openfda.package_ndc`
+    2. Add ability to specify specials rules for parsing fields, for example `indications_and_usage` split characters
+    3. Custom field ordering
+    4. Skipping rules, like skipping fields without `openfda`
+28. Might actually be easier to load all of this into a database
+    1. The database tables would be the intermediate representation
+    2. Export to Excel, CSV, etc. would be easier since it would just be SQL queries
