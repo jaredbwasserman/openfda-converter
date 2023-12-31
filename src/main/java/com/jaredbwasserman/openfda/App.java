@@ -13,10 +13,10 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
+// TODO: Fix me
 public class App {
     private static final Logger logger = LoggerFactory.getLogger(App.class);
 
-    // TODO: Fix me
     public static void main(String[] args) {
         // Helpers
         final EndpointDownloadClient endpointDownloadClient = EndpointDownloadClientFactory.getEndpointDownloadClient();
@@ -28,14 +28,40 @@ public class App {
         final Endpoint drugLabelEndpoint = drugEndpointCategory.endpoints().stream().filter((endpoint) -> "label".equals(endpoint.friendlyName().internalName())).findFirst().get();
 
         // Download
-        final List<String> endpointDatasetFilePathStrings = endpointDownloadClient
-                .downloadAndUnzipEndpointFiles(
-                        drugLabelEndpoint,
-                        "/Users/jwasserman/Desktop"
-                );
+        final List<String> endpointDatasetFilePathStrings = endpointDownloadClient.downloadAndUnzipEndpointFiles(drugLabelEndpoint, "/Users/jwasserman/Desktop");
 
         // Write to Excel
-        excelWriter.writeWorkbooks(drugLabelEndpoint, endpointDatasetFilePathStrings, "/Users/jwasserman/Desktop");
+        excelWriter.writeWorkbooks(
+                List.of(
+                        "openfda.application_number",
+                        "openfda.package_ndc",
+                        "openfda.brand_name",
+                        "openfda.generic_name",
+                        "openfda.is_original_packager",
+                        "openfda.manufacturer_name",
+                        "indications_and_usage",
+                        "openfda.original_packager_product_ndc",
+                        "openfda.pharm_class_cs",
+                        "openfda.pharm_class_epc",
+                        "openfda.pharm_class_moa",
+                        "openfda.pharm_class_pe",
+                        "openfda.product_ndc",
+                        "openfda.product_type",
+                        "openfda.route",
+                        "openfda.rxcui",
+                        "openfda.spl_id",
+                        "openfda.spl_set_id",
+                        "openfda.substance_name",
+                        "openfda.unii",
+                        "openfda.upc"
+                ),
+                List.of(
+                        "openfda.package_ndc"
+                ),
+                endpointDatasetFilePathStrings,
+                "/Users/jwasserman/Desktop",
+                drugLabelEndpoint.getCamelCaseName()
+        );
 
         // Clean up
         endpointDatasetFilePathStrings.forEach(FileUtil::deleteFile);
