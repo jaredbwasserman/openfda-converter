@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-// TODO: Figure out a better way to deal with certain keys
+// TODO: Figure out a better way to deal with certain fields
 // TODO: Add support for more than one worksheet
 // TODO: Add support for returning more than one workbook
 // TODO: Each workbook should have a part
@@ -33,14 +33,14 @@ public class FastexcelExcelWriter implements ExcelWriter {
                                        @NonNull String destinationDirectoryPathString) {
         logger.info(
                 "Write to Excel starting: {} -> {}",
-                endpoint.getHyphenatedName(),
+                endpoint.getCamelCaseName(),
                 destinationDirectoryPathString
         );
 
         final String workbookPath = getWorkbookPath(destinationDirectoryPathString);
 
         // TODO: Figure out a better way to deal with this
-        final List<String> keys = List.of(
+        final List<String> fields = List.of(
                 "openfda.application_number",
                 "openfda.package_ndc",
                 "openfda.brand_name",
@@ -72,7 +72,7 @@ public class FastexcelExcelWriter implements ExcelWriter {
 
             // Header
             int headerColCounter = 0;
-            for (final String key : keys) {
+            for (final String key : fields) {
                 worksheet.value(0, headerColCounter, key);
                 ++headerColCounter;
             }
@@ -97,7 +97,7 @@ public class FastexcelExcelWriter implements ExcelWriter {
                     }
                     for (final String package_ndc : (List<String>) result.getOrDefault("openfda.package_ndc", Collections.emptyList())) {
                         int colCounter = 0;
-                        for (final String key : keys) {
+                        for (final String key : fields) {
                             String val = null;
                             if ("openfda.package_ndc".equals(key)) {
                                 val = package_ndc;
@@ -106,10 +106,6 @@ public class FastexcelExcelWriter implements ExcelWriter {
                                 if (null != valIntermediate) {
                                     if (valIntermediate instanceof List) {
                                         val = String.join("\n", ((List) valIntermediate).stream().map(a -> String.valueOf(a)).toList());
-
-                                        if ("indications_and_usage".equals(key)) {
-                                            val = getIndicationsAndUsageValue(val);
-                                        }
                                     }
                                 }
                             }
@@ -133,7 +129,7 @@ public class FastexcelExcelWriter implements ExcelWriter {
 
         logger.info(
                 "Write to Excel finished: {} -> {}",
-                endpoint.getHyphenatedName(),
+                endpoint.getCamelCaseName(),
                 destinationDirectoryPathString
         );
         logger.info("Bad row count: {}", badCounter);
@@ -150,18 +146,5 @@ public class FastexcelExcelWriter implements ExcelWriter {
                         new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss").format(System.currentTimeMillis())
                         + ".xlsx"
         );
-    }
-
-    private String getIndicationsAndUsageValue(String input) {
-        if (input.contains("•")) {
-            return String.join("\n•", input.split("•"));
-        } else if (input.contains("■")) {
-            return String.join("\n■", input.split("■"));
-        } else if (input.contains(". ")) {
-            return String.join(".\n", input.split("\\. "));
-        } else if (input.contains(", ")) {
-            return String.join(",\n", input.split(", "));
-        }
-        return input;
     }
 }

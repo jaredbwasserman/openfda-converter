@@ -22,6 +22,7 @@
         <jackson.version>2.16.0</jackson.version>
         <commons.version>3.14.0</commons.version>
         <fastexcel.version>0.16.5</fastexcel.version>
+        <snakeyaml.version>2.2</snakeyaml.version>
 
         <junit.version>5.10.1</junit.version>
     </properties>
@@ -78,6 +79,11 @@
             <groupId>org.dhatim</groupId>
             <artifactId>fastexcel</artifactId>
             <version>${fastexcel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>${snakeyaml.version}</version>
         </dependency>
 
         <dependency>

@@ -31,7 +31,7 @@ public class SimpleFileZipper implements FileZipper {
         }
 
         // Source file name
-        String sourceFileName;
+        String sourceFilename;
         try (final ZipFile sourceZipFile = new ZipFile(sourceZipFilePathString)) {
             final List<String> sourceZipFileEntries = sourceZipFile
                     .stream()
@@ -44,7 +44,7 @@ public class SimpleFileZipper implements FileZipper {
                 ));
             }
 
-            sourceFileName = sourceZipFileEntries.get(0);
+            sourceFilename = sourceZipFileEntries.get(0);
         } catch (Exception exception) {
             logger.error(
                     "Error while computing source zip file name for {}",
@@ -63,7 +63,7 @@ public class SimpleFileZipper implements FileZipper {
         // Extract
         try (final FileSystem zipFileSystem = FileSystems.newFileSystem(Paths.get(sourceZipFilePathString))) {
             Files.copy(
-                    zipFileSystem.getPath(sourceFileName),
+                    zipFileSystem.getPath(sourceFilename),
                     Paths.get(destinationFilePathString)
             );
             return Optional.of(destinationFilePathString);

@@ -26,7 +26,7 @@ public record ForkJoinEndpointDownloadClient(
     public List<String> downloadAndUnzipEndpointFiles(@NonNull Endpoint endpoint, @NonNull String destinationDirectoryPathString) {
         logger.info(
                 "Download and unzip starting: {} -> {}",
-                endpoint.getHyphenatedName(),
+                endpoint.getCamelCaseName(),
                 destinationDirectoryPathString
         );
 
@@ -59,7 +59,7 @@ public record ForkJoinEndpointDownloadClient(
 
         logger.info(
                 "Download and unzip finished: {} -> {}",
-                endpoint.getHyphenatedName(),
+                endpoint.getCamelCaseName(),
                 destinationDirectoryPathString
         );
         return destinationFilePathStrings;

@@ -1,9 +1,27 @@
 package com.jaredbwasserman.openfda.api;
 
-import com.jaredbwasserman.openfda.model.generated.DrugLabelKeys;
+import com.jaredbwasserman.openfda.model.generated.AnimalandveterinaryEvent;
+import com.jaredbwasserman.openfda.model.generated.Device510k;
+import com.jaredbwasserman.openfda.model.generated.DeviceClassification;
+import com.jaredbwasserman.openfda.model.generated.DeviceCovid19serology;
+import com.jaredbwasserman.openfda.model.generated.DeviceEvent;
+import com.jaredbwasserman.openfda.model.generated.DevicePma;
+import com.jaredbwasserman.openfda.model.generated.DeviceRecall;
+import com.jaredbwasserman.openfda.model.generated.DeviceRegistrationlisting;
+import com.jaredbwasserman.openfda.model.generated.DeviceUdi;
+import com.jaredbwasserman.openfda.model.generated.DrugDrugsfda;
+import com.jaredbwasserman.openfda.model.generated.DrugEnforcement;
+import com.jaredbwasserman.openfda.model.generated.DrugEvent;
+import com.jaredbwasserman.openfda.model.generated.DrugLabel;
+import com.jaredbwasserman.openfda.model.generated.DrugNdc;
+import com.jaredbwasserman.openfda.model.generated.FoodEnforcement;
+import com.jaredbwasserman.openfda.model.generated.FoodEvent;
+import com.jaredbwasserman.openfda.model.generated.OtherNsde;
+import com.jaredbwasserman.openfda.model.generated.OtherSubstance;
+import com.jaredbwasserman.openfda.model.generated.OtherUnii;
+import com.jaredbwasserman.openfda.model.generated.TobaccoProblem;
 import lombok.NonNull;
 
-import java.util.Collections;
 import java.util.List;
 
 // See https://open.fda.gov/apis/
@@ -108,7 +126,8 @@ public class OpenFDAAPI {
                             new Endpoint(
                                     ENDPOINT_ADVERSE_EVENTS_NAME,
                                     ENDPOINT_CATEGORY_ANIMAL_AND_VETERINARY_NAME,
-                                    Collections.emptyList()
+                                    ENDPOINT_CATEGORY_ANIMAL_AND_VETERINARY_NAME.internalName() + ENDPOINT_ADVERSE_EVENTS_NAME.internalName(),
+                                    AnimalandveterinaryEvent.getFields()
                             )
                     )
             ),
@@ -118,27 +137,32 @@ public class OpenFDAAPI {
                             new Endpoint(
                                     ENDPOINT_ADVERSE_EVENTS_NAME,
                                     ENDPOINT_CATEGORY_DRUG_NAME,
-                                    Collections.emptyList()
+                                    ENDPOINT_CATEGORY_DRUG_NAME.internalName() + ENDPOINT_ADVERSE_EVENTS_NAME.internalName(),
+                                    DrugEvent.getFields()
                             ),
                             new Endpoint(
                                     ENDPOINT_PRODUCT_LABELING_NAME,
                                     ENDPOINT_CATEGORY_DRUG_NAME,
-                                    DrugLabelKeys.getKeys()
+                                    ENDPOINT_CATEGORY_DRUG_NAME.internalName() + ENDPOINT_PRODUCT_LABELING_NAME.internalName(),
+                                    DrugLabel.getFields()
                             ),
                             new Endpoint(
                                     ENDPOINT_NDC_DIRECTORY_NAME,
                                     ENDPOINT_CATEGORY_DRUG_NAME,
-                                    Collections.emptyList()
+                                    ENDPOINT_CATEGORY_DRUG_NAME.internalName() + ENDPOINT_NDC_DIRECTORY_NAME.internalName(),
+                                    DrugNdc.getFields()
                             ),
                             new Endpoint(
                                     ENDPOINT_RECALL_ENFORCEMENT_REPORTS_NAME,
                                     ENDPOINT_CATEGORY_DRUG_NAME,
-                                    Collections.emptyList()
+                                    ENDPOINT_CATEGORY_DRUG_NAME.internalName() + ENDPOINT_RECALL_ENFORCEMENT_REPORTS_NAME.internalName(),
+                                    DrugEnforcement.getFields()
                             ),
                             new Endpoint(
                                     ENDPOINT_DRUGS_AT_FDA_NAME,
                                     ENDPOINT_CATEGORY_DRUG_NAME,
-                                    Collections.emptyList()
+                                    ENDPOINT_DRUGS_AT_FDA_NAME.internalName(),
+                                    DrugDrugsfda.getFields()
                             )
                     )
             ),
@@ -148,47 +172,56 @@ public class OpenFDAAPI {
                             new Endpoint(
                                     ENDPOINT_510K_NAME,
                                     ENDPOINT_CATEGORY_DEVICE_NAME,
-                                    Collections.emptyList()
+                                    ENDPOINT_CATEGORY_DEVICE_NAME.internalName() + "clearance",
+                                    Device510k.getFields()
                             ),
                             new Endpoint(
                                     ENDPOINT_CLASSIFICATION_NAME,
                                     ENDPOINT_CATEGORY_DEVICE_NAME,
-                                    Collections.emptyList()
+                                    ENDPOINT_CATEGORY_DEVICE_NAME.internalName() + "class",
+                                    DeviceClassification.getFields()
                             ),
                             new Endpoint(
                                     ENDPOINT_RECALL_ENFORCEMENT_REPORTS_NAME,
                                     ENDPOINT_CATEGORY_DEVICE_NAME,
-                                    Collections.emptyList()
+                                    ENDPOINT_CATEGORY_DEVICE_NAME.internalName() + ENDPOINT_RECALL_ENFORCEMENT_REPORTS_NAME.internalName(),
+                                    DeviceRecall.getFields()
                             ),
                             new Endpoint(
                                     ENDPOINT_ADVERSE_EVENTS_NAME,
                                     ENDPOINT_CATEGORY_DEVICE_NAME,
-                                    Collections.emptyList()
+                                    ENDPOINT_CATEGORY_DEVICE_NAME.internalName() + ENDPOINT_ADVERSE_EVENTS_NAME.internalName(),
+                                    DeviceEvent.getFields()
                             ),
                             new Endpoint(
                                     ENDPOINT_PRE_MARKET_APPROVAL_NAME,
                                     ENDPOINT_CATEGORY_DEVICE_NAME,
-                                    Collections.emptyList()
+                                    ENDPOINT_CATEGORY_DEVICE_NAME.internalName() + ENDPOINT_PRE_MARKET_APPROVAL_NAME.internalName(),
+                                    DevicePma.getFields()
                             ),
                             new Endpoint(
                                     ENDPOINT_RECALLS_NAME,
                                     ENDPOINT_CATEGORY_DEVICE_NAME,
-                                    Collections.emptyList()
+                                    ENDPOINT_CATEGORY_DEVICE_NAME.internalName() + ENDPOINT_RECALLS_NAME.internalName(),
+                                    DeviceRecall.getFields()
                             ),
                             new Endpoint(
                                     ENDPOINT_REGISTRATIONS_AND_LISTINGS_NAME,
                                     ENDPOINT_CATEGORY_DEVICE_NAME,
-                                    Collections.emptyList()
+                                    ENDPOINT_CATEGORY_DEVICE_NAME.internalName() + "reglist",
+                                    DeviceRegistrationlisting.getFields()
                             ),
                             new Endpoint(
                                     ENDPOINT_COVID_19_SEROLOGICAL_TESTING_EVALUATIONS_NAME,
                                     ENDPOINT_CATEGORY_DEVICE_NAME,
-                                    Collections.emptyList()
+                                    ENDPOINT_CATEGORY_DEVICE_NAME.internalName() + ENDPOINT_COVID_19_SEROLOGICAL_TESTING_EVALUATIONS_NAME.internalName(),
+                                    DeviceCovid19serology.getFields()
                             ),
                             new Endpoint(
                                     ENDPOINT_UNIQUE_DEVICE_IDENTIFIER_NAME,
                                     ENDPOINT_CATEGORY_DEVICE_NAME,
-                                    Collections.emptyList()
+                                    ENDPOINT_CATEGORY_DEVICE_NAME.internalName() + ENDPOINT_UNIQUE_DEVICE_IDENTIFIER_NAME.internalName(),
+                                    DeviceUdi.getFields()
                             )
                     )
             ),
@@ -198,12 +231,14 @@ public class OpenFDAAPI {
                             new Endpoint(
                                     ENDPOINT_RECALL_ENFORCEMENT_REPORTS_NAME,
                                     ENDPOINT_CATEGORY_FOOD_NAME,
-                                    Collections.emptyList()
+                                    ENDPOINT_CATEGORY_FOOD_NAME.internalName() + ENDPOINT_RECALL_ENFORCEMENT_REPORTS_NAME.internalName(),
+                                    FoodEnforcement.getFields()
                             ),
                             new Endpoint(
                                     ENDPOINT_ADVERSE_EVENTS_NAME,
                                     ENDPOINT_CATEGORY_FOOD_NAME,
-                                    Collections.emptyList()
+                                    ENDPOINT_CATEGORY_FOOD_NAME.internalName() + ENDPOINT_ADVERSE_EVENTS_NAME.internalName(),
+                                    FoodEvent.getFields()
                             )
                     )
             ),
@@ -213,17 +248,20 @@ public class OpenFDAAPI {
                             new Endpoint(
                                     ENDPOINT_NSDE_NAME,
                                     ENDPOINT_CATEGORY_OTHER_NAME,
-                                    Collections.emptyList()
+                                    ENDPOINT_CATEGORY_OTHER_NAME.internalName() + ENDPOINT_NSDE_NAME.internalName(),
+                                    OtherNsde.getFields()
                             ),
                             new Endpoint(
                                     ENDPOINT_SUBSTANCE_DATA_REPORTS_NAME,
                                     ENDPOINT_CATEGORY_OTHER_NAME,
-                                    Collections.emptyList()
+                                    ENDPOINT_CATEGORY_OTHER_NAME.internalName() + ENDPOINT_SUBSTANCE_DATA_REPORTS_NAME.internalName(),
+                                    OtherSubstance.getFields()
                             ),
                             new Endpoint(
                                     ENDPOINT_UNII_NAME,
                                     ENDPOINT_CATEGORY_OTHER_NAME,
-                                    Collections.emptyList()
+                                    ENDPOINT_CATEGORY_OTHER_NAME.internalName() + ENDPOINT_UNII_NAME.internalName(),
+                                    OtherUnii.getFields()
                             )
                     )
             ),
@@ -233,13 +271,15 @@ public class OpenFDAAPI {
                             new Endpoint(
                                     ENDPOINT_PROBLEM_REPORTS_NAME,
                                     ENDPOINT_CATEGORY_TOBACCO_NAME,
-                                    Collections.emptyList()
+                                    ENDPOINT_CATEGORY_TOBACCO_NAME.internalName() + ENDPOINT_PROBLEM_REPORTS_NAME.internalName(),
+                                    TobaccoProblem.getFields()
                             )
                     )
             )
     );
 
     private static final String FILE_MANIFEST_URL_STRING = "https://api.fda.gov/download.json";
+    private static final String FIELDS_YAML_URL_STRING_TEMPLATE = "https://open.fda.gov/fields/%s.yaml";
 
     @NonNull
     public static List<EndpointCategory> getEndpointCategories() {
@@ -249,5 +289,10 @@ public class OpenFDAAPI {
     @NonNull
     public static String getFileManifestUrlString() {
         return FILE_MANIFEST_URL_STRING;
+    }
+
+    @NonNull
+    public static String getFieldsYamlUrlString(String endpointDatasetName) {
+        return String.format(FIELDS_YAML_URL_STRING_TEMPLATE, endpointDatasetName);
     }
 }

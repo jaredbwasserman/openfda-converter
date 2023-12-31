@@ -2,12 +2,13 @@
 
 Downloads data from the [openFDA API](https://api.fda.gov/download.json) and converts the data to various formats.
 
-## Generating Keys
+## Generating Fields
 
-1. Supply a value for the `KEYS_GENERATOR_PATH` environment variable
-2. Go to `com.jaredbwasserman.openfda.generate.EndpointDatasetKeysGeneratorTest`
-3. Run `testEndpointDatasetKeysGenerator`
-4. Move the generated files into the `com.jaredbwasserman.openfda.model.generated` package
+1. Supply the absolute path for `com.jaredbwasserman.openfda.model.generated` as the value of
+   the `FIELDS_GENERATOR_OUTPUT_PATH` environment variable
+2. Go to `com.jaredbwasserman.openfda.generate.EndpointDatasetFieldsGeneratorTest`
+3. Run `testGenerateFieldsForAllEndpoints`
+4. Format the generated files in the `com.jaredbwasserman.openfda.model.generated` package
 
 ## References
 
@@ -16,6 +17,7 @@ Downloads data from the [openFDA API](https://api.fda.gov/download.json) and con
 * [List .zip directories without extracting](https://stackoverflow.com/questions/11468163/list-zip-directories-without-extracting)
 * [How to extract specific file in a zip file in java](https://stackoverflow.com/questions/32179094/how-to-extract-specific-file-in-a-zip-file-in-java)
 * [Intro to the Jackson ObjectMapper](https://www.baeldung.com/jackson-object-mapper-tutorial)
+* [Parsing YAML with SnakeYAML](https://www.baeldung.com/java-snake-yaml)
 * [How To Use GUI Designer In IntelliJ IDEA IDE (2023 )](https://www.youtube.com/watch?v=whF_Qm1epQ8)
 
 ## TODO
@@ -46,7 +48,7 @@ Downloads data from the [openFDA API](https://api.fda.gov/download.json) and con
     1. Even on failure
 14. Lock the interface when it is downloading and processing
 15. Open folder showing Excel files at the end
-16. Add keys to `OpenFDAAPI`
+16. Add fields to `OpenFDAAPI`
     1. Need to add everything except drug label
 17. Fix NullPointer in `fromEndpointDatasetRaw`
     1. Can reproduce with drug event
