@@ -83,3 +83,10 @@ Downloads data from the [openFDA API](https://api.fda.gov/download.json) and con
 28. Might actually be easier to load all of this into a database
     1. The database tables would be the intermediate representation
     2. Export to Excel, CSV, etc. would be easier since it would just be SQL queries
+29. Create functions to pass in for the thread pool (rather than always downloading and unzipping)
+    1. Function to download
+    2. Function to unzip (this might just happen automatically if needed rather than being a passed in function)
+    3. Function to write to relational database
+    4. Function to write to Excel (maybe each sheet is handled by a thread?)
+30. Make generating the fields a maven compile step rather than a manual test
+    1. Update the README appropriately
