@@ -92,3 +92,4 @@ Downloads data from the [openFDA API](https://api.fda.gov/download.json) and con
     1. Update the README appropriately
 31. Remove all the `@SuppressWarnings("unchecked")`
 32. Gray out everything that is not "drug" and "label" for each dropdown, respectively
+33. Still need to pick the endpoint even when giving local files, so it knows how to parse them
