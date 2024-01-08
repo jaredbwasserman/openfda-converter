@@ -7,17 +7,18 @@ import com.jaredbwasserman.openfda.download.EndpointDownloadClient;
 import com.jaredbwasserman.openfda.download.EndpointDownloadClientFactory;
 import com.jaredbwasserman.openfda.excel.ExcelWriter;
 import com.jaredbwasserman.openfda.excel.ExcelWriterFactory;
+import com.jaredbwasserman.openfda.ui.MainForm;
 import com.jaredbwasserman.openfda.util.FileUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-// TODO: Fix me
 public class App {
-    private static final Logger logger = LoggerFactory.getLogger(App.class);
-
     public static void main(String[] args) {
+        new MainForm();
+    }
+
+    // TODO: Fix me
+    private void doWork() {
         // Helpers
         final EndpointDownloadClient endpointDownloadClient = EndpointDownloadClientFactory.getEndpointDownloadClient();
         final ExcelWriter excelWriter = ExcelWriterFactory.getExcelWriter();
