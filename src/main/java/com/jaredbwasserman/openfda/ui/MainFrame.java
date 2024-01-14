@@ -7,45 +7,45 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MainFrame extends JFrame {
+    private static final String TITLE = "openFDA Converter";
     private static final int WIDTH = 800;
     private static final int HEIGHT = 600;
 
-    private final JLabel endpointCategoryLabel;
-    private final JComboBox<EndpointCategoryComboItem> endpointCategoryComboBox;
-    private final JLabel endpointLabel;
-    private final JComboBox<EndpointComboItem> endpointComboBox;
-    private final JLabel newLine1;
-    private final JButton placeholderButton;
+    private final JLabel endpointCategoryLabel = new JLabel();
+    private final JLabel endpointLabel = new JLabel();
+    private final JComboBox<EndpointCategoryComboItem> endpointCategoryComboBox = new JComboBox<>();
+    private final JComboBox<EndpointComboItem> endpointComboBox = new JComboBox<>();
+    private final JButton placeholderButton = new JButton();
 
     public MainFrame() {
-        endpointCategoryLabel = new JLabel();
-        endpointCategoryComboBox = new JComboBox<>();
-        endpointLabel = new JLabel();
-        endpointComboBox = new JComboBox<>();
-        newLine1 = new JLabel();
-        placeholderButton = new JButton();
-
-        add(endpointCategoryLabel);
-        add(endpointCategoryComboBox);
-        add(endpointLabel);
-        add(endpointComboBox);
-        add(newLine1);
-        add(placeholderButton);
-
-        setTitle("openFDA Converter");
-
-        addEndpointCategories();
-        endpointCategoryComboBox.addActionListener(e -> addEndpointsForSelectedEndpointCategory());
-
-        newLine1.setPreferredSize(new Dimension(WIDTH, 0));
-
-        setDefaultValues();
+        setTitle(TITLE);
         setLayout(new FlowLayout());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(WIDTH, HEIGHT);
         setLocationRelativeTo(null);
         setResizable(false);
+        initComponents();
         setVisible(true);
+    }
+
+    private void initComponents() {
+        endpointCategoryLabel.setText("Endpoint Category:");
+        add(endpointCategoryLabel);
+
+        addEndpointCategories();
+        endpointCategoryComboBox.setSelectedIndex(0);
+        endpointCategoryComboBox.addActionListener(e -> addEndpointsForSelectedEndpointCategory());
+        add(endpointCategoryComboBox);
+
+        endpointLabel.setText("Endpoint:");
+        add(endpointLabel);
+
+        addEndpointsForSelectedEndpointCategory();
+        add(endpointComboBox);
+
+        addNewLine();
+
+        add(placeholderButton);
     }
 
     private void addEndpointCategories() {
@@ -58,7 +58,8 @@ public class MainFrame extends JFrame {
     }
 
     private void addEndpointsForSelectedEndpointCategory() {
-        final EndpointCategoryComboItem endpointCategoryComboItem = (EndpointCategoryComboItem) endpointCategoryComboBox.getSelectedItem();
+        final EndpointCategoryComboItem endpointCategoryComboItem =
+                (EndpointCategoryComboItem) endpointCategoryComboBox.getSelectedItem();
         if (null != endpointCategoryComboItem) {
             endpointComboBox.removeAllItems();
             addEndpoints(endpointCategoryComboItem.endpointCategory());
@@ -74,8 +75,9 @@ public class MainFrame extends JFrame {
         );
     }
 
-    private void setDefaultValues() {
-        endpointCategoryComboBox.setSelectedIndex(0);
-        addEndpointsForSelectedEndpointCategory();
+    private void addNewLine() {
+        final JLabel newLine = new JLabel();
+        newLine.setPreferredSize(new Dimension(WIDTH, 0));
+        add(newLine);
     }
 }
