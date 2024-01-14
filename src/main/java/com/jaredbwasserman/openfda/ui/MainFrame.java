@@ -6,20 +6,32 @@ import com.jaredbwasserman.openfda.api.OpenFDAAPI;
 import javax.swing.*;
 import java.awt.*;
 
-public class MainForm extends JFrame {
+public class MainFrame extends JFrame {
     private static final int WIDTH = 800;
     private static final int HEIGHT = 600;
 
-    private JPanel mainPanel;
-    private JLabel endpointCategoryLabel;
-    private JComboBox<EndpointCategoryComboItem> endpointCategoryComboBox;
-    private JLabel endpointLabel;
-    private JComboBox<EndpointComboItem> endpointComboBox;
-    private JLabel newLine1;
-    private JButton placeholderButton;
+    private final JLabel endpointCategoryLabel;
+    private final JComboBox<EndpointCategoryComboItem> endpointCategoryComboBox;
+    private final JLabel endpointLabel;
+    private final JComboBox<EndpointComboItem> endpointComboBox;
+    private final JLabel newLine1;
+    private final JButton placeholderButton;
 
-    public MainForm() {
-        setContentPane(mainPanel);
+    public MainFrame() {
+        endpointCategoryLabel = new JLabel();
+        endpointCategoryComboBox = new JComboBox<>();
+        endpointLabel = new JLabel();
+        endpointComboBox = new JComboBox<>();
+        newLine1 = new JLabel();
+        placeholderButton = new JButton();
+
+        add(endpointCategoryLabel);
+        add(endpointCategoryComboBox);
+        add(endpointLabel);
+        add(endpointComboBox);
+        add(newLine1);
+        add(placeholderButton);
+
         setTitle("openFDA Converter");
 
         addEndpointCategories();
@@ -28,6 +40,7 @@ public class MainForm extends JFrame {
         newLine1.setPreferredSize(new Dimension(WIDTH, 0));
 
         setDefaultValues();
+        setLayout(new FlowLayout());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(WIDTH, HEIGHT);
         setLocationRelativeTo(null);

@@ -7,14 +7,14 @@ import com.jaredbwasserman.openfda.download.EndpointDownloadClient;
 import com.jaredbwasserman.openfda.download.EndpointDownloadClientFactory;
 import com.jaredbwasserman.openfda.excel.ExcelWriter;
 import com.jaredbwasserman.openfda.excel.ExcelWriterFactory;
-import com.jaredbwasserman.openfda.ui.MainForm;
+import com.jaredbwasserman.openfda.ui.MainFrame;
 import com.jaredbwasserman.openfda.util.FileUtil;
 
 import java.util.List;
 
 public class App {
     public static void main(String[] args) {
-        new MainForm();
+        new MainFrame();
     }
 
     // TODO: Fix me

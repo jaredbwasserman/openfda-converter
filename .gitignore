@@ -46,3 +46,6 @@ app.properties
 # IntelliJ Files
 .idea/
 *.iml
+
+# macOS
+.DS_Store
