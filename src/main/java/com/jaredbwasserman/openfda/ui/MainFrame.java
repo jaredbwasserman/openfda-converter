@@ -24,7 +24,7 @@ public class MainFrame extends JFrame {
     private final JComboBox<EndpointComboItem> endpointComboBox = new JComboBox<>();
 
     private final JButton selectInputFilesButton = new JButton();
-    private final JButton resetInputFilesButton = new JButton();
+    private final JButton clearInputFilesButton = new JButton();
     private final JList<String> inputFilesList = new JList<>(new DefaultListModel<>());
 
     // Second row
@@ -102,8 +102,8 @@ public class MainFrame extends JFrame {
             }
         });
 
-        resetInputFilesButton.setText("Clear Input Files");
-        resetInputFilesButton.addActionListener(e ->
+        clearInputFilesButton.setText("Clear Input Files");
+        clearInputFilesButton.addActionListener(e ->
                 ((DefaultListModel<String>) inputFilesList.getModel()).removeAllElements()
         );
 
@@ -113,7 +113,7 @@ public class MainFrame extends JFrame {
         final JPanel inputFilesPanel = new JPanel(new BorderLayout());
         inputFilesPanel.setBorder(BorderFactory.createTitledBorder("Input Files (Optional)"));
         inputFilesPanel.add(selectInputFilesButton, BorderLayout.WEST);
-        inputFilesPanel.add(resetInputFilesButton, BorderLayout.EAST);
+        inputFilesPanel.add(clearInputFilesButton, BorderLayout.EAST);
         inputFilesPanel.add(inputFilesScrollPane, BorderLayout.SOUTH);
         add(inputFilesPanel);
     }
