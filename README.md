@@ -98,3 +98,4 @@ Downloads data from the [openFDA API](https://api.fda.gov/download.json) and con
 33. Still need to pick the endpoint even when giving local files, so it knows how to parse them
 34. Fix `WARNING: Secure coding is automatically enabled for restorable state!`
 35. Get rid of the `MainForm.form` warnings
+36. Why does `inputFilesList` change size sometimes?

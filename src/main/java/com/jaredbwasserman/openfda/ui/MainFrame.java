@@ -27,6 +27,9 @@ public class MainFrame extends JFrame {
     private final JButton clearInputFilesButton = new JButton();
     private final JList<String> inputFilesList = new JList<>(new DefaultListModel<>());
 
+    private final JButton selectOutputDirectoryButton = new JButton();
+    private final JList<String> outputDirectoryList = new JList<>(new DefaultListModel<>());
+
     // Second row
     private final JList<FieldListItem> availableFieldsList = new JList<>(new DefaultListModel<>());
 
@@ -51,7 +54,7 @@ public class MainFrame extends JFrame {
 
         addInputFilesPanel();
 
-        add(new JPanel()); // TODO: Fix me
+        addOutputDirectoryPanel();
 
         // Second row
         resetAvailableFieldsForSelectedEndpoint();
@@ -88,6 +91,7 @@ public class MainFrame extends JFrame {
         selectInputFilesButton.setText("Select Input Files");
         selectInputFilesButton.addActionListener(e -> {
             final JFileChooser inputFilesChooser = new JFileChooser();
+            inputFilesChooser.setDialogTitle("Select Input Files");
             inputFilesChooser.setAcceptAllFileFilterUsed(false);
             inputFilesChooser.setFileFilter(new FileNameExtensionFilter("JSON", "json"));
             inputFilesChooser.setMultiSelectionEnabled(true);
@@ -112,10 +116,36 @@ public class MainFrame extends JFrame {
 
         final JPanel inputFilesPanel = new JPanel(new BorderLayout());
         inputFilesPanel.setBorder(BorderFactory.createTitledBorder("Input Files (Optional)"));
-        inputFilesPanel.add(selectInputFilesButton, BorderLayout.WEST);
+        inputFilesPanel.add(new JLabel("Your data files "), BorderLayout.WEST);
+        inputFilesPanel.add(selectInputFilesButton, BorderLayout.CENTER);
         inputFilesPanel.add(clearInputFilesButton, BorderLayout.EAST);
         inputFilesPanel.add(inputFilesScrollPane, BorderLayout.SOUTH);
         add(inputFilesPanel);
+    }
+
+    private void addOutputDirectoryPanel() {
+        selectOutputDirectoryButton.setText("Select Output Directory");
+        selectOutputDirectoryButton.addActionListener(e -> {
+            final JFileChooser outputDirectoryChooser = new JFileChooser();
+            outputDirectoryChooser.setDialogTitle("Select Output Directory");
+            outputDirectoryChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            outputDirectoryChooser.setAcceptAllFileFilterUsed(false);
+
+            if (JFileChooser.APPROVE_OPTION == outputDirectoryChooser.showOpenDialog(MainFrame.this)) {
+                final DefaultListModel<String> outputDirectoryListModel = (DefaultListModel<String>) outputDirectoryList.getModel();
+                outputDirectoryListModel.removeAllElements();
+                outputDirectoryListModel.add(0, outputDirectoryChooser.getSelectedFile().getAbsolutePath());
+            }
+        });
+
+        outputDirectoryList.setSelectionModel(new DisabledItemSelectionModel());
+        final JScrollPane outputDirectoryScrollPane = new JScrollPane(outputDirectoryList);
+
+        final JPanel outputDirectoryPanel = new JPanel(new BorderLayout());
+        outputDirectoryPanel.setBorder(BorderFactory.createTitledBorder("Output Directory"));
+        outputDirectoryPanel.add(selectOutputDirectoryButton, BorderLayout.CENTER);
+        outputDirectoryPanel.add(outputDirectoryScrollPane, BorderLayout.SOUTH);
+        add(outputDirectoryPanel);
     }
 
     private void addFieldsListPanel(JList<FieldListItem> fieldsList, Mutability mutability, String title) {
