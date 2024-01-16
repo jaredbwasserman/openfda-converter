@@ -1,4 +1,4 @@
-package com.jaredbwasserman.openfda.ui;
+package com.jaredbwasserman.openfda.ui.endpoint;
 
 import com.jaredbwasserman.openfda.api.Endpoint;
 import lombok.NonNull;

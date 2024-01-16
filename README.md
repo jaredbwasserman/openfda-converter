@@ -18,9 +18,8 @@ Downloads data from the [openFDA API](https://api.fda.gov/download.json) and con
 * [How to extract specific file in a zip file in java](https://stackoverflow.com/questions/32179094/how-to-extract-specific-file-in-a-zip-file-in-java)
 * [Intro to the Jackson ObjectMapper](https://www.baeldung.com/jackson-object-mapper-tutorial)
 * [Parsing YAML with SnakeYAML](https://www.baeldung.com/java-snake-yaml)
-* [How To Use GUI Designer In IntelliJ IDEA IDE (2023 )](https://www.youtube.com/watch?v=whF_Qm1epQ8)
 * [Adding items to a JComboBox](https://stackoverflow.com/questions/17887927/adding-items-to-a-jcombobox)
-* [Demo - DropDemo](https://docs.oracle.com/javase/tutorial/uiswing/dnd/dropmodedemo.html)
+* [Add String to JList exactly where they're dropped, not at the bottom](https://stackoverflow.com/questions/15531783/add-string-to-jlist-exactly-where-theyre-dropped-not-at-the-bottom)
 
 ## TODO
 
