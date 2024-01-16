@@ -18,8 +18,8 @@ public class OpenFDAProcessor {
                 inputFilePathStrings,
                 destinationDirectoryPathString,
                 selectedFields,
-                splitFields)
-        );
+                splitFields
+        ));
         processorThread.start();
     }
 }

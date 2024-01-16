@@ -103,3 +103,28 @@ Downloads data from the [openFDA API](https://api.fda.gov/download.json) and con
 36. Why do `inputFilesList` and `outputDirectoryList` change size sometimes?
 37. Error dialog if there is an Exception while processing
     1. May involve rethrowing things so the processing thread can handle them
+38. Make sure this test works (split fields logic might be wrong not sure)
+    1. Selected fields  
+       openfda.application_number  
+       openfda.package_ndc  
+       openfda.brand_name  
+       openfda.generic_name  
+       openfda.is_original_packager  
+       openfda.manufacturer_name  
+       indications_and_usage  
+       openfda.original_packager_product_ndc  
+       openfda.pharm_class_cs  
+       openfda.pharm_class_epc  
+       openfda.pharm_class_moa  
+       openfda.pharm_class_pe  
+       openfda.product_ndc  
+       openfda.product_type  
+       openfda.route  
+       openfda.rxcui  
+       openfda.spl_id  
+       openfda.spl_set_id  
+       openfda.substance_name  
+       openfda.unii  
+       openfda.upc
+    2. Split fields  
+       openfda.package_ndc

@@ -202,7 +202,7 @@ public class MainFrame extends JFrame {
         startProcessingButton.setText("Start");
         startProcessingButton.addActionListener(e -> {
             setProcessingEnabled(false);
-            setProcessingLabelText("Checking input...");
+            setProcessingLabelText("Checking input");
 
             final EndpointComboItem endpointComboItem = (EndpointComboItem) endpointComboBox.getSelectedItem();
             if (null == endpointComboItem) {

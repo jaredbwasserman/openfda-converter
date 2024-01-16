@@ -11,8 +11,6 @@ import com.jaredbwasserman.openfda.util.FileUtil;
 import java.util.List;
 
 class OpenFDARunnable implements Runnable {
-    private static final int TOTAL_STEPS = 5;
-
     private final MainFrame mainFrame;
     private final Endpoint endpoint;
     private final List<String> inputFilePathStrings;
@@ -44,7 +42,7 @@ class OpenFDARunnable implements Runnable {
 
     @Override
     public void run() {
-        mainFrame.setProcessingLabelText("Starting...");
+        mainFrame.setProcessingLabelText("Starting");
         sleep();
         completeStep();
 
@@ -68,7 +66,7 @@ class OpenFDARunnable implements Runnable {
 
         // Write to Excel
         mainFrame.setProcessingLabelText("Writing to Excel...");
-        excelWriter.writeWorkbooks(
+        final List<String> workbookPath = excelWriter.writeWorkbooks(
                 selectedFields,
                 splitFields,
                 filePathStrings,
@@ -87,18 +85,20 @@ class OpenFDARunnable implements Runnable {
 
         // Done
         mainFrame.setProcessingLabelText("Done");
-        completeStep();
-        sleep();
         sleep();
 
         // Reset
-        mainFrame.updateProcessingProgress(0, TOTAL_STEPS);
+        mainFrame.setProcessingLabelText(String.format("Output file(s): %s", workbookPath.get(0))); // TODO: Fix when more than one workbook can be returned
+        sleep();
+        sleep();
+        sleep();
+        mainFrame.updateProcessingProgress(0, 1);
         mainFrame.setProcessingLabelText("");
         mainFrame.setProcessingEnabled(true);
     }
 
     private void completeStep() {
-        mainFrame.updateProcessingProgress(++progress, TOTAL_STEPS);
+        mainFrame.updateProcessingProgress(++progress, 4);
     }
 
     private void sleep() {
