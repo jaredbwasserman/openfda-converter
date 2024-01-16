@@ -21,6 +21,8 @@ Downloads data from the [openFDA API](https://api.fda.gov/download.json) and con
 * [Adding items to a JComboBox](https://stackoverflow.com/questions/17887927/adding-items-to-a-jcombobox)
 * [Add String to JList exactly where they're dropped, not at the bottom](https://stackoverflow.com/questions/15531783/add-string-to-jlist-exactly-where-theyre-dropped-not-at-the-bottom)
 * [Make JList Values Unselectable](https://stackoverflow.com/questions/17863780/make-jlist-values-unselectable)
+* [Prevent Swing GUI locking up during a background task](https://stackoverflow.com/questions/940913/prevent-swing-gui-locking-up-during-a-background-task)
+* [Progress Bar Java](https://stackoverflow.com/questions/15199091/progress-bar-java)
 
 ## TODO
 
@@ -98,4 +100,6 @@ Downloads data from the [openFDA API](https://api.fda.gov/download.json) and con
 33. Still need to pick the endpoint even when giving local files, so it knows how to parse them
 34. Fix `WARNING: Secure coding is automatically enabled for restorable state!`
 35. Get rid of the `MainForm.form` warnings
-36. Why does `inputFilesList` change size sometimes?
+36. Why do `inputFilesList` and `outputDirectoryList` change size sometimes?
+37. Error dialog if there is an Exception while processing
+    1. May involve rethrowing things so the processing thread can handle them

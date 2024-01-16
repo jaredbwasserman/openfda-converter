@@ -2,6 +2,7 @@ package com.jaredbwasserman.openfda.ui;
 
 import com.jaredbwasserman.openfda.api.EndpointCategory;
 import com.jaredbwasserman.openfda.api.OpenFDAAPI;
+import com.jaredbwasserman.openfda.process.OpenFDAProcessor;
 import com.jaredbwasserman.openfda.ui.endpoint.EndpointCategoryComboItem;
 import com.jaredbwasserman.openfda.ui.endpoint.EndpointComboItem;
 import com.jaredbwasserman.openfda.ui.fieldlist.FieldListItem;
@@ -37,15 +38,44 @@ public class MainFrame extends JFrame {
 
     private final JList<FieldListItem> splitFieldsList = new JList<>(new DefaultListModel<>());
 
+    // Third row
+    private final JButton startProcessingButton = new JButton();
+    private final JProgressBar processingProgressBar = new JProgressBar();
+    private final JLabel processingLabel = new JLabel();
+
     public MainFrame() {
         setTitle("openFDA Converter");
-        setLayout(new GridLayout(2, 3));
+        setLayout(new GridLayout(3, 3));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         initComponents();
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    // TODO: Call this in the processing thread too
+    public void showError(String errorMessage) {
+        JOptionPane.showMessageDialog(
+                this,
+                errorMessage,
+                "Error",
+                JOptionPane.ERROR_MESSAGE
+        );
+    }
+
+    public void setProcessingEnabled(boolean enabled) {
+        startProcessingButton.setEnabled(enabled);
+        processingProgressBar.setVisible(!enabled);
+    }
+
+    public void updateProcessingProgress(int current, int maximum) {
+        processingProgressBar.setMaximum(maximum);
+        processingProgressBar.setValue(current);
+    }
+
+    public void setProcessingLabelText(String text) {
+        processingLabel.setText(text);
     }
 
     private void initComponents() {
@@ -65,6 +95,13 @@ public class MainFrame extends JFrame {
 
         addFieldsListPanel(splitFieldsList, Mutability.MUTABLE, "Fields To Split On");
         splitFieldsList.setDropMode(DropMode.INSERT);
+
+        // Third row
+        add(new JPanel());
+
+        addProcessingPanel();
+
+        add(new JPanel());
     }
 
     private void addEndpointCategoryAndEndpointPanel() {
@@ -159,6 +196,78 @@ public class MainFrame extends JFrame {
         listPanel.setBorder(BorderFactory.createTitledBorder(title));
         listPanel.add(scrollPane);
         add(listPanel);
+    }
+
+    private void addProcessingPanel() {
+        startProcessingButton.setText("Start");
+        startProcessingButton.addActionListener(e -> {
+            setProcessingEnabled(false);
+            setProcessingLabelText("Checking input...");
+
+            final EndpointComboItem endpointComboItem = (EndpointComboItem) endpointComboBox.getSelectedItem();
+            if (null == endpointComboItem) {
+                showError("Please select an endpoint.");
+                setProcessingLabelText("");
+                setProcessingEnabled(true);
+                return;
+            }
+
+            final DefaultListModel<String> inputFilesListModel = (DefaultListModel<String>) inputFilesList.getModel();
+            final List<String> inputFilePathStrings = new ArrayList<>();
+            for (int index = 0; index < inputFilesListModel.size(); ++index) {
+                inputFilePathStrings.add(inputFilesListModel.getElementAt(index));
+            }
+
+            final DefaultListModel<String> outputDirectoryListModel = (DefaultListModel<String>) outputDirectoryList.getModel();
+            if (outputDirectoryListModel.isEmpty()) {
+                showError("Please select an output directory.");
+                setProcessingLabelText("");
+                setProcessingEnabled(true);
+                return;
+            }
+            final String outputDirectory = outputDirectoryListModel.get(0);
+
+            final DefaultListModel<FieldListItem> selectedFieldsListModel = (DefaultListModel<FieldListItem>) selectedFieldsList.getModel();
+            if (selectedFieldsListModel.isEmpty()) {
+                showError("Please select some fields.");
+                setProcessingLabelText("");
+                setProcessingEnabled(true);
+                return;
+            }
+            final List<String> selectedFields = new ArrayList<>();
+            for (int index = 0; index < selectedFieldsListModel.size(); ++index) {
+                selectedFields.add(selectedFieldsListModel.getElementAt(index).getField());
+            }
+
+            final DefaultListModel<FieldListItem> splitFieldsListModel = (DefaultListModel<FieldListItem>) splitFieldsList.getModel();
+            final List<String> splitFields = new ArrayList<>();
+            for (int index = 0; index < splitFieldsListModel.size(); ++index) {
+                selectedFields.add(selectedFieldsListModel.getElementAt(index).getField());
+            }
+
+            OpenFDAProcessor.process(
+                    MainFrame.this,
+                    endpointComboItem.endpoint(),
+                    inputFilePathStrings,
+                    outputDirectory,
+                    selectedFields,
+                    splitFields
+            );
+        });
+
+        processingProgressBar.setVisible(false);
+        processingProgressBar.setMinimum(0);
+        processingProgressBar.setStringPainted(true);
+
+        processingLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+        final JPanel processingPanel = new JPanel(new GridLayout(5, 1));
+        processingPanel.add(new JPanel());
+        processingPanel.add(startProcessingButton);
+        processingPanel.add(processingProgressBar);
+        processingPanel.add(processingLabel);
+        processingPanel.add(new JPanel());
+        add(processingPanel);
     }
 
     private void addEndpointCategories() {
