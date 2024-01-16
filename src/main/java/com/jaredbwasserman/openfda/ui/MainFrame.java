@@ -9,17 +9,29 @@ import com.jaredbwasserman.openfda.ui.fieldlist.FieldListItemCellRenderer;
 import com.jaredbwasserman.openfda.ui.fieldlist.FieldListItemTransferHandler;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.jaredbwasserman.openfda.ui.fieldlist.FieldListItemTransferHandler.Mutability;
 
 public class MainFrame extends JFrame {
+    // First row
     private final JComboBox<EndpointCategoryComboItem> endpointCategoryComboBox = new JComboBox<>();
     private final JComboBox<EndpointComboItem> endpointComboBox = new JComboBox<>();
+
+    private final JButton selectInputFilesButton = new JButton();
+    private final JButton resetInputFilesButton = new JButton();
+    private final JList<String> inputFilesList = new JList<>(new DefaultListModel<>());
+
+    // Second row
     private final JList<FieldListItem> availableFieldsList = new JList<>(new DefaultListModel<>());
+
     private final JList<FieldListItem> selectedFieldsList = new JList<>(new DefaultListModel<>());
+
     private final JList<FieldListItem> splitFieldsList = new JList<>(new DefaultListModel<>());
 
     public MainFrame() {
@@ -37,7 +49,7 @@ public class MainFrame extends JFrame {
         // First row
         addEndpointCategoryAndEndpointPanel();
 
-        add(new JPanel()); // TODO: Fix me
+        addInputFilesPanel();
 
         add(new JPanel()); // TODO: Fix me
 
@@ -69,8 +81,41 @@ public class MainFrame extends JFrame {
         final JPanel endpointCategoryAndEndpointPanel = new JPanel(new GridLayout(2, 1));
         endpointCategoryAndEndpointPanel.add(endpointCategoryPanel);
         endpointCategoryAndEndpointPanel.add(endpointPanel);
-
         add(endpointCategoryAndEndpointPanel);
+    }
+
+    private void addInputFilesPanel() {
+        selectInputFilesButton.setText("Select Input Files");
+        selectInputFilesButton.addActionListener(e -> {
+            final JFileChooser inputFilesChooser = new JFileChooser();
+            inputFilesChooser.setAcceptAllFileFilterUsed(false);
+            inputFilesChooser.setFileFilter(new FileNameExtensionFilter("JSON", "json"));
+            inputFilesChooser.setMultiSelectionEnabled(true);
+
+            if (JFileChooser.APPROVE_OPTION == inputFilesChooser.showOpenDialog(MainFrame.this)) {
+                final List<String> selectedFiles = Arrays.stream(inputFilesChooser.getSelectedFiles())
+                        .map(File::getAbsolutePath)
+                        .toList();
+                final DefaultListModel<String> inputFilesListModel = (DefaultListModel<String>) inputFilesList.getModel();
+                inputFilesListModel.removeAllElements();
+                inputFilesListModel.addAll(selectedFiles);
+            }
+        });
+
+        resetInputFilesButton.setText("Clear Input Files");
+        resetInputFilesButton.addActionListener(e ->
+                ((DefaultListModel<String>) inputFilesList.getModel()).removeAllElements()
+        );
+
+        inputFilesList.setSelectionModel(new DisabledItemSelectionModel());
+        final JScrollPane inputFilesScrollPane = new JScrollPane(inputFilesList);
+
+        final JPanel inputFilesPanel = new JPanel(new BorderLayout());
+        inputFilesPanel.setBorder(BorderFactory.createTitledBorder("Input Files (Optional)"));
+        inputFilesPanel.add(selectInputFilesButton, BorderLayout.WEST);
+        inputFilesPanel.add(resetInputFilesButton, BorderLayout.EAST);
+        inputFilesPanel.add(inputFilesScrollPane, BorderLayout.SOUTH);
+        add(inputFilesPanel);
     }
 
     private void addFieldsListPanel(JList<FieldListItem> fieldsList, Mutability mutability, String title) {
@@ -83,7 +128,6 @@ public class MainFrame extends JFrame {
         final JPanel listPanel = new JPanel(new BorderLayout());
         listPanel.setBorder(BorderFactory.createTitledBorder(title));
         listPanel.add(scrollPane);
-
         add(listPanel);
     }
 

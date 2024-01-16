@@ -20,6 +20,7 @@ Downloads data from the [openFDA API](https://api.fda.gov/download.json) and con
 * [Parsing YAML with SnakeYAML](https://www.baeldung.com/java-snake-yaml)
 * [Adding items to a JComboBox](https://stackoverflow.com/questions/17887927/adding-items-to-a-jcombobox)
 * [Add String to JList exactly where they're dropped, not at the bottom](https://stackoverflow.com/questions/15531783/add-string-to-jlist-exactly-where-theyre-dropped-not-at-the-bottom)
+* [Make JList Values Unselectable](https://stackoverflow.com/questions/17863780/make-jlist-values-unselectable)
 
 ## TODO
 
