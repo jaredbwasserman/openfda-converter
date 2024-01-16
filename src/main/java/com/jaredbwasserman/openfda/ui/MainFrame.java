@@ -20,10 +20,11 @@ public class MainFrame extends JFrame {
     private final JComboBox<EndpointComboItem> endpointComboBox = new JComboBox<>();
     private final JList<FieldListItem> availableFieldsList = new JList<>(new DefaultListModel<>());
     private final JList<FieldListItem> selectedFieldsList = new JList<>(new DefaultListModel<>());
+    private final JList<FieldListItem> splitFieldsList = new JList<>(new DefaultListModel<>());
 
     public MainFrame() {
         setTitle("openFDA Converter");
-        setLayout(new GridLayout(1, 3));
+        setLayout(new GridLayout(2, 3));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         initComponents();
@@ -33,13 +34,22 @@ public class MainFrame extends JFrame {
     }
 
     private void initComponents() {
+        // First row
         addEndpointCategoryAndEndpointPanel();
 
+        add(new JPanel()); // TODO: Fix me
+
+        add(new JPanel()); // TODO: Fix me
+
+        // Second row
         resetAvailableFieldsForSelectedEndpoint();
         addFieldsListPanel(availableFieldsList, Mutability.IMMUTABLE, "Available Fields");
 
-        addFieldsListPanel(selectedFieldsList, Mutability.MUTABLE, "Selected Fields");
+        addFieldsListPanel(selectedFieldsList, Mutability.MUTABLE, "Fields To Select");
         selectedFieldsList.setDropMode(DropMode.INSERT);
+
+        addFieldsListPanel(splitFieldsList, Mutability.MUTABLE, "Fields To Split On");
+        splitFieldsList.setDropMode(DropMode.INSERT);
     }
 
     private void addEndpointCategoryAndEndpointPanel() {
@@ -118,6 +128,9 @@ public class MainFrame extends JFrame {
 
             final DefaultListModel<FieldListItem> selectedFieldsListModel = (DefaultListModel<FieldListItem>) selectedFieldsList.getModel();
             selectedFieldsListModel.removeAllElements();
+
+            final DefaultListModel<FieldListItem> splitFieldsListModel = (DefaultListModel<FieldListItem>) splitFieldsList.getModel();
+            splitFieldsListModel.removeAllElements();
         }
     }
 }

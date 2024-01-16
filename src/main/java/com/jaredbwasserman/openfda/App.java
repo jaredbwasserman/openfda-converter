@@ -69,6 +69,7 @@ public class App {
                 drugLabelEndpoint.getCamelCaseName()
         );
 
+        // TODO: Only if downloaded
         // Clean up
         endpointDatasetFilePathStrings.forEach(FileUtil::deleteFile);
     }
