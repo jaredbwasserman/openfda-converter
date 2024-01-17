@@ -10,6 +10,13 @@ Downloads data from the [openFDA API](https://api.fda.gov/download.json) and con
 3. Run `testGenerateFieldsForAllEndpoints`
 4. Format the generated files in the `com.jaredbwasserman.openfda.model.generated` package
 
+## Releasing
+
+1. Update the version in the `pom.xml` file
+2. Run `mvn clean package`
+3. Create a new GitHub release with a matching version number
+4. Upload `target/openfda-converter.jar` to the GitHub release
+
 ## References
 
 * [Download a File From an URL in Java](https://www.baeldung.com/java-download-file)
@@ -23,6 +30,8 @@ Downloads data from the [openFDA API](https://api.fda.gov/download.json) and con
 * [Make JList Values Unselectable](https://stackoverflow.com/questions/17863780/make-jlist-values-unselectable)
 * [Prevent Swing GUI locking up during a background task](https://stackoverflow.com/questions/940913/prevent-swing-gui-locking-up-during-a-background-task)
 * [Progress Bar Java](https://stackoverflow.com/questions/15199091/progress-bar-java)
+* [How to Create an Executable JAR with Maven](https://www.baeldung.com/executable-jar-with-maven)
+* [Override maven-assembly-plugin output file name](https://stackoverflow.com/questions/33673260/override-maven-assembly-plugin-output-file-name)
 
 ## TODO
 
