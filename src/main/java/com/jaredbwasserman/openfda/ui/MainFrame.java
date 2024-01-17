@@ -153,7 +153,7 @@ public class MainFrame extends JFrame {
 
         final JPanel inputFilesPanel = new JPanel(new BorderLayout());
         inputFilesPanel.setBorder(BorderFactory.createTitledBorder("Input Files (Optional)"));
-        inputFilesPanel.add(new JLabel("Your data files "), BorderLayout.WEST);
+        inputFilesPanel.add(new JLabel("<html>If no input files are<br/>provided, the latest<br/>files are downloaded.<html>"), BorderLayout.WEST);
         inputFilesPanel.add(selectInputFilesButton, BorderLayout.CENTER);
         inputFilesPanel.add(clearInputFilesButton, BorderLayout.EAST);
         inputFilesPanel.add(inputFilesScrollPane, BorderLayout.SOUTH);
@@ -242,7 +242,7 @@ public class MainFrame extends JFrame {
             final DefaultListModel<FieldListItem> splitFieldsListModel = (DefaultListModel<FieldListItem>) splitFieldsList.getModel();
             final List<String> splitFields = new ArrayList<>();
             for (int index = 0; index < splitFieldsListModel.size(); ++index) {
-                selectedFields.add(selectedFieldsListModel.getElementAt(index).getField());
+                splitFields.add(splitFieldsListModel.getElementAt(index).getField());
             }
 
             OpenFDAProcessor.process(
