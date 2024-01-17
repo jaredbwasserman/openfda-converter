@@ -47,7 +47,7 @@ Downloads data from the [openFDA API](https://api.fda.gov/download.json) and con
     1. The database tables would be the intermediate representation
     2. Export to Excel, CSV, etc. would be easier since it would just be SQL queries
 10. Add column whose value is the originating openfda data file
-11. Add support for more file types than just `xlsx`.
+11. Add support for more file types than just `xlsx`
 12. Add skipping rules, like skipping fields without `openfda`
 13. Make generating the fields a maven compile step rather than a manual test
     1. Update the README appropriately
