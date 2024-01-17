@@ -56,4 +56,3 @@ Downloads data from the [openFDA API](https://api.fda.gov/download.json) and con
 16. Why do `inputFilesList` and `outputDirectoryList` change size sometimes?
 17. Error dialog if there is an Exception while processing
     1. May involve rethrowing things so the processing thread can handle them
-18. Make sure to update Maven version to correlate with GitHub release version
